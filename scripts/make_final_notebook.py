@@ -4,6 +4,7 @@ reports/PSYC40Final.html and reports/PSYC40Final.pdf (headless Chrome).
 The notebook reads only committed files (results/, figures/, reports/qc_table.csv), so it runs
 on any laptop after cloning, without the raw data. Rerun this script after new results land.
 """
+import json
 import subprocess
 from pathlib import Path
 
@@ -222,12 +223,14 @@ code("""
 display(Image("../figures/transitions.png", width=1000))
 """)
 
-md("""
+sc = json.loads((RES / "brain3d" / "showcase.json").read_text())
+lag = sc["decoder_sleep_lag_s"]
+md(f"""
 ### 5.4 3D model
 
-A 3D model of the recorded neurons from the two Dino_061914 sessions: the same rat, recorded at the same time with one probe in the anterior cingulate cortex (ACC) and one in the medial prefrontal cortex (mPFC), across the authors' WAKE→SLEEP switch. Units are placed inside their region's volume in the BrainGlobe `whs_sd_rat_39um` rat atlas (mPFC → prelimbic and infralimbic areas; ACC → cingulate areas 1 and 2). Excitatory cells are green, inhibitory cells purple, and each marker swells with the spikes it fires. The strip below shows the authors' state and the decoder's prediction for each probe (Dino was the held-out rat). The two probes' predictions agree almost second by second, including the error: Dino's waking seconds are read as REM.
+A 3D model of the {sc["n_units"]} neurons recorded in session {sc["session"]}, with one probe in the {sc["region_name"]} ({sc["region"]}) of rat {sc["rat"]}, across one of the authors' WAKE→SLEEP switches. Units are placed inside the {sc["region"]} volume of the BrainGlobe `whs_sd_rat_39um` rat atlas (cingulate areas 1 and 2); positions within the region are schematic. Excitatory neurons are green, inhibitory neurons purple, and each marker swells with the spikes it fires. The strip below shows the authors' label and the decoder's prediction for each second; {sc["rat"]} was the held-out rat for these predictions and is one of the two best-decoded rats, and this is the switch where the decoder agrees best with the authors. In the window the decoder is right on {100 * sc["wake_correct"]:.0f}% of the waking seconds and {100 * sc["sleep_correct"]:.0f}% of the sleeping seconds, switches to nonREM {"%.0f s after" % lag if lag else "at"} the authors' boundary, and calls the authors' microarousal that follows WAKE.
 
-* Rotatable version: `results/brain3d/brain3d.html` (open in a browser; play button at the bottom left).
+* Rotatable version: `results/brain3d/brain3d.html` (open in a browser; play button below the strip).
 * Video: `results/brain3d/brain3d.mp4`.
 """)
 code("""
@@ -265,6 +268,8 @@ md(f"""
 * Watson BO, Levenstein D, Greene JP, Gelinas JN, Buzsáki G (2016). Network homeostasis and state dynamics of neocortical sleep. *Neuron* 90:839. doi:10.1016/j.neuron.2016.03.036
 * Dataset: CRCNS fcx-1, doi:10.6080/K02N506Q
 * Saper CB, Scammell TE, Lu J (2005). Hypothalamic regulation of sleep and circadian rhythms. *Nature* 437:1257. doi:10.1038/nature04284
+
+**AI use.** I used an AI assistant (Claude) to write the code in this repository and to edit the text of this notebook. The project idea, the model ideation, the background reading, the direction of troubleshooting and every key decision (what the input is, which cell groups to use, how to evaluate, what to keep and what to cut) were mine.
 """)
 
 nb = nbf.v4.new_notebook(); nb["cells"] = cells

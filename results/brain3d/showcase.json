@@ -1,0 +1,17 @@
+{
+ "session": "BWRat20_101513",
+ "rat": "BWRat20",
+ "region": "ACC",
+ "region_name": "anterior cingulate cortex",
+ "t0": 16528.0,
+ "t1": 16638.0,
+ "boundary": 16578.0,
+ "n_units": 66,
+ "n_E": 60,
+ "n_I": 6,
+ "wake_correct": 0.86,
+ "sleep_correct": 0.92,
+ "decoder_sleep_lag_s": 1.0,
+ "ma_seconds": 26,
+ "ma_called_wake": 0.8846153846153846
+}

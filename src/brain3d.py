@@ -10,9 +10,10 @@ the anterior-posterior axis of the region, and each unit is jittered within 150 
 shank's anchor. Within-region positions are schematic; the dataset gives shank and region,
 not coordinates.
 
-Showcase: the Dino_061914 ACC + mPFC pair (same rat, same day, shared clock confirmed in
-QC), across the WAKE -> SLEEP switch, with a timeline of the authors' state and the
-decoder's prediction. Outputs: results/brain3d/brain3d.html (rotatable) and brain3d.mp4.
+Showcase (scripts/build_brain3d.py): one session, one region, across a WAKE -> SLEEP switch,
+with a timeline of the authors' state and the decoder's prediction for the held-out rat.
+Outputs: results/brain3d/brain3d.html (rotatable), brain3d.mp4 and showcase.json (the facts
+the notebook quotes).
 """
 from __future__ import annotations
 

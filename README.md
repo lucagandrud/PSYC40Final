@@ -6,6 +6,8 @@ Dartmouth PSYC 40 final project. I decode the authors' sleep-wake state (WAKE / 
 
 **3D model:** [`results/brain3d/brain3d.html`](results/brain3d/brain3d.html) (rotatable, press play) and [`results/brain3d/brain3d.mp4`](results/brain3d/brain3d.mp4).
 
+**AI use:** I used an AI assistant (Claude) to write the code and to edit the text of the notebook; the project idea, model ideation, background reading, troubleshooting direction and all key decisions were mine.
+
 ## What is in here
 
 | folder | contents |
