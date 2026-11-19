@@ -20,7 +20,7 @@ export CRCNS_USERNAME='your_username'
 export CRCNS_PASSWORD='your_password'
 ```
 
-then `chmod 600 ~/.crcns_credentials` and run `bash scripts/run_unattended.sh`. It downloads the sessions listed in `data/manifests/download_queue.txt` (MD5-verified, raw LFP skipped), and every session that lands is automatically loaded, checked and added to the QC report. Progress: `bash scripts/status.sh`.
+then `chmod 600 ~/.crcns_credentials` and run `bash scripts/run_unattended.sh`. It downloads the sessions listed in `scripts/download_queue.txt` (MD5-verified, raw LFP skipped), and every session that lands is automatically loaded, checked and added to the QC report. Progress: `bash scripts/status.sh`.
 
 ## Pipeline so far
 

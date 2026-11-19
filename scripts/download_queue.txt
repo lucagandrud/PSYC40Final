@@ -1,0 +1,26 @@
+# Download queue (round-robin across rats). Edit freely; workers re-read it.
+# 10 rats; Templeton excluded (authors: "all unstable", "strange HF noise").
+# Round 1: one session per rat
+BWRat20_101013
+20140526_277um
+BWRat17_121912
+BWRat19_032413
+BWRat18_020513
+Splinter_020915
+BWRat21_121113
+Rizzo_022715
+Bogey_012615
+Dino_061914_mPFC
+# Round 2: second session per rat (Dino ACC first: completes the same-day ACC/mPFC pair)
+Dino_061914_ACC
+BWRat17_121712
+BWRat19_032513
+20140528_565um
+BWRat21_121813
+Splinter_020515
+BWRat20_101513
+Rizzo_022615
+# Round 3: third session per rat
+BWRat21_121613
+20140527_421um
+Dino_061814_mPFC

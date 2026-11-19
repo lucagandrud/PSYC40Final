@@ -18,6 +18,7 @@ MAN="$ROOT/data/manifests"
 RAW="$ROOT/data/raw"
 LOG="$ROOT/data/download.log"
 QUEUE="$MAN/download_queue.txt"
+[ -f "$QUEUE" ] || cp "$ROOT/scripts/download_queue.txt" "$QUEUE"   # repo copy of the queue
 FETCH="$ROOT/scripts/crcns_fetch.sh"
 MISSING="$MAN/missing_files.csv"
 FAILED="$MAN/download_failures.txt"
