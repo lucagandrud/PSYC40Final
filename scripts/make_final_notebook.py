@@ -48,6 +48,43 @@ dec2, base2 = stat("decoder", "bal_acc_2class_mean"), stat("baseline", "bal_acc_
 dec2_sd, base2_sd = stat("decoder", "bal_acc_2class_sd"), stat("baseline", "bal_acc_2class_sd")
 dec2_k, base2_k = stat("decoder", "kappa_2class_mean"), stat("baseline", "kappa_2class_mean")
 rec = {k: stat("decoder", f"recall_{k}") for k in ("WAKE", "nonREM", "REM")}
+act, act_b = stat("decoder", "nonrem_vs_activated_mean"), stat("baseline", "nonrem_vs_activated_mean")
+act_sd, act_b_sd = stat("decoder", "nonrem_vs_activated_sd"), stat("baseline", "nonrem_vs_activated_sd")
+
+
+def wins(col):
+    try:
+        d = folds[folds.experiment == "decoder"].set_index("rat")[col]
+        b = folds[folds.experiment == "baseline"].set_index("rat")[col]
+        return f"{int((d > b.loc[d.index]).sum())} of {len(d)}"
+    except Exception:
+        return "–"
+
+
+def ablation_lines():
+    """Mean 3-class balanced accuracy on the ablation rats for the matched-budget reference and each ablation."""
+    try:
+        ref = folds[folds.experiment == "decoder_short"]
+        rats = set(ref.rat)
+        if not rats:
+            return "", {}
+        out, vals = [], {}
+        names = {"decoder_short": "all cells (reference, same budget)", "E_only": "E cells only", "I_only": "I cells only",
+                 "E_matched": "E cells, as many as I cells", "no_population": "without population convolutions",
+                 "no_relational": "without the relational layer"}
+        for e, name in names.items():
+            d = folds[(folds.experiment == e) & folds.rat.isin(rats)]
+            if d.empty:
+                continue
+            vals[e] = (d.balanced_accuracy.mean(), d.balanced_accuracy.std(), d.bal_acc_nonrem_vs_activated.mean(), len(d))
+            out.append(f"| {name} | {vals[e][0]:.2f} ± {vals[e][1]:.2f} | {vals[e][2]:.2f} | {vals[e][3]} |")
+        header = "| model (same training budget) | WAKE / nonREM / REM balanced accuracy | nonREM vs activated | rats |\n|---|---|---|---|\n"
+        return header + "\n".join(out), vals
+    except Exception:
+        return "", {}
+
+
+abl_table, abl_vals = ablation_lines()
 
 # ------------------------------------------------------------------ notebook text
 md("""
@@ -131,7 +168,7 @@ md(f"""
 | CNN reading the raster | **{dec} ± {dec_sd}** | {dec_k} | **{dec2} ± {dec2_sd}** | {dec2_k} | {n_rats("decoder")} |
 | logistic regression on E/I rate traces | {base} ± {base_sd} | {base_k} | {base2} ± {base2_sd} | {base2_k} | {n_rats("baseline")} |
 
-Per-state recall of the CNN, averaged over rats: WAKE {rec["WAKE"]}, nonREM {rec["nonREM"]}, REM {rec["REM"]}.
+The CNN beats the baseline on the three-state score in {wins("balanced_accuracy")} rats. A third view of the same predictions, nonREM against the two activated states (WAKE and REM merged): CNN {act} ± {act_sd}, baseline {act_b} ± {act_b_sd}, better in {wins("bal_acc_nonrem_vs_activated")} rats. Per-state recall of the CNN, averaged over rats: WAKE {rec["WAKE"]}, nonREM {rec["nonREM"]}, REM {rec["REM"]}.
 """)
 code("""
 display(Image("../figures/results_decoder.png", width=1000))
@@ -142,7 +179,7 @@ show.columns = [f"{'3-class' if a == 'balanced_accuracy' else 'WAKE vs SLEEP'}: 
 display(HTML("<p><b>Balanced accuracy per held-out rat</b></p>")); display(show)
 """)
 
-md("""
+md(f"""
 ### 5.2 Ablations: what carries the state information?
 
 Each row is the same network retrained from scratch with a part removed (on the same folds, with shorter training to fit the time), except the neuron-dropping curve, which gives the trained full model random subsets of the test rat's neurons without retraining.
@@ -150,7 +187,9 @@ Each row is the same network retrained from scratch with a part removed (on the 
 * **E cells only / I cells only**: the authors' type labels decide which rows the model sees (sessions with fewer than 3 I cells are skipped for these rows, every rat keeps at least one session).
 * **E cells, as many as I cells**: the control for the E/I comparison, random E subsets of the session's I-cell count (50 draws).
 * **Without the population convolutions**: the pooled signal goes straight to the readout, so the model cannot see how the population evolves over the second.
-* **Without the relational layer**: neurons are never compared with each other before pooling.
+* **Without the relational layer**: neurons are never compared with each other before pooling (run only where time allowed).
+
+{abl_table}
 """)
 code("""
 import os
@@ -178,7 +217,7 @@ display(t.round(2))
 md("""
 ### 5.4 3D model
 
-The Dino_061914 pair (ACC and mPFC probes in the same rat on the same day; QC confirmed they share a clock), across the authors' WAKE→SLEEP switch, in the BrainGlobe `whs_sd_rat_39um` atlas. Units are placed inside their region's volume (mPFC → prelimbic + infralimbic areas; ACC → cingulate areas 1 and 2), grouped by shank along the anterior-posterior axis; the dataset gives shank and region, not coordinates, so positions within a region are schematic. E cells are green, I cells purple, and each marker swells with the spikes it fires. The strip below the video shows the authors' state and the decoder's prediction for the same seconds.
+The Dino_061914 pair (ACC and mPFC probes in the same rat on the same day; QC confirmed they share a clock), across the authors' WAKE→SLEEP switch, in the BrainGlobe `whs_sd_rat_39um` atlas. Units are placed inside their region's volume (mPFC → prelimbic + infralimbic areas; ACC → cingulate areas 1 and 2), grouped by shank along the anterior-posterior axis; the dataset gives shank and region, not coordinates, so positions within a region are schematic. E cells are green, I cells purple, and each marker swells with the spikes it fires. The strip below the video shows the authors' state and the decoder's prediction for each probe over the same seconds (Dino was the held-out rat for these predictions). The two probes' predictions agree almost second by second, including the error: Dino's waking seconds are read as REM, and the first minute after the switch is read as a mix of nonREM and REM.
 
 * Rotatable version: `results/brain3d/brain3d.html` (open in a browser; play button at the bottom left).
 * Video: `results/brain3d/brain3d.mp4`.
@@ -190,7 +229,7 @@ display(Image("../figures/brain3d_still.png", width=800))
 md(f"""
 ## 6. Interpretation, limitations and improvements
 
-**What the results show.** With the raster as input, a network trained on eight rats scores a ninth at {dec} balanced accuracy (chance 0.33), against {base} for a model that can only read E and I rates. So frontal-cortex spiking carries the sleep-wake state in a form that transfers across animals, and most of that information is in *how* cells fire (timing within a second, silences, which cells fire together) rather than in how much. The ablation rows say which parts matter and the neuron-dropping curve says how many cells the readout needs (see the figures above for the numbers; they were still being computed when this text was written, so I kept the text generic). Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, but the transition data here are too few and too coarse to say more.
+**What the results show.** Read from the raster, a network trained on eight rats (a ninth used only to decide when to stop) scores a tenth at {dec} balanced accuracy over the three states (chance 0.33), against {base} for a model that can only read E and I rates, and it wins in {wins("balanced_accuracy")} rats. What transfers across animals is mainly the difference between nonREM and the two activated states: {act} balanced accuracy for nonREM vs WAKE+REM, in every rat above the baseline's {act_b}. nonREM recall is at least 0.73 in nine of ten rats. Telling WAKE from REM with cortical spikes alone is the weak point, and it fails in a rat-specific way: in four rats WAKE recall is 0.76 or higher; in three (Dino, Bogey, BWRat18) it is 0.06 or lower because their waking seconds are called REM; in BWRat17, BWRat21 and Splinter it is 0.24–0.46, with most waking seconds called nonREM. This is the pattern the physiology predicts. nonREM has a signature that is visible in spikes, the alternation of population silence (OFF periods) and activity, while WAKE and REM are both activated cortex with similar firing; the authors themselves separated them with the EMG proxy, which the decoder never sees. The ablation table above says what the network relies on, and the neuron-dropping curve how many cells its readout needs. Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, though the transition data are too few and too coarse to say more.
 
 **Limitations.**
 1. *Labels and inputs share signal.* The authors scored states from LFP and an LFP-derived EMG proxy recorded on the same probes as the spikes, so part of what the decoder recovers is the scoring itself.

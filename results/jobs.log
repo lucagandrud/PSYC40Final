@@ -160,3 +160,16 @@ fold test=BWRat19 val=BWRat20 variant=full C=16 Q=2
 Bogey     test bal.acc 0.531 kappa 0.371 (val 0.632, 12 epochs, 52.8 min)
 2026-11-19 03:21:11 start pid 90757: --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
 fold test=BWRat20 val=BWRat21 variant=full C=16 Q=2
+  epoch  0 loss 1.110 val loss 1.035 bal.acc 0.418 (100 s)
+  epoch  0 loss 1.112 val loss 1.060 bal.acc 0.333 (153 s)
+  epoch  0 loss 1.109 val loss 1.104 bal.acc 0.334 (162 s)
+  epoch  0 loss 1.107 val loss 1.096 bal.acc 0.331 (164 s)
+  epoch  1 loss 1.038 val loss 0.765 bal.acc 0.598 (156 s)
+  epoch  1 loss 1.068 val loss 0.983 bal.acc 0.487 (176 s)
+  epoch  1 loss 1.101 val loss 1.087 bal.acc 0.497 (185 s)
+  epoch  1 loss 1.068 val loss 1.213 bal.acc 0.415 (170 s)
+  epoch  2 loss 0.938 val loss 0.686 bal.acc 0.601 (166 s)
+  epoch  2 loss 1.003 val loss 0.911 bal.acc 0.473 (177 s)
+  epoch  2 loss 1.055 val loss 0.975 bal.acc 0.543 (189 s)
+  epoch  2 loss 0.930 val loss 2.096 bal.acc 0.421 (173 s)
+  epoch  3 loss 0.927 val loss 0.738 bal.acc 0.554 (163 s)

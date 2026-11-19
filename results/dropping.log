@@ -1,1 +1,11 @@
 B22       k=1    bal.acc 0.342 kappa 0.006
+B22       k=2    bal.acc 0.358 kappa 0.043
+B22       k=5    bal.acc 0.388 kappa 0.128
+B22       k=10   bal.acc 0.450 kappa 0.288
+B22       k=20   bal.acc 0.490 kappa 0.402
+B22       k=all  bal.acc 0.478 kappa 0.355
+BWRat17   k=1    bal.acc 0.337 kappa 0.005
+BWRat17   k=2    bal.acc 0.338 kappa 0.005
+BWRat17   k=5    bal.acc 0.344 kappa 0.021
+BWRat17   k=10   bal.acc 0.361 kappa 0.063
+BWRat17   k=20   bal.acc 0.396 kappa 0.156
