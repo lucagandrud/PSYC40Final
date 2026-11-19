@@ -99,8 +99,11 @@ def ablation_sentence():
             "than an equal handful of excitatory cells, which matches the paper's finding that inhibitory firing tracks state most strongly. ")
     if "no_population" in v:
         d = v["no_population"][0] - v["decoder_short"][0]
+        spread = max(v["no_population"][1], v["decoder_short"][1])
+        verdict = ("within the rat-to-rat spread, so five rats cannot tell whether the second-scale population dynamics add information beyond what the per-neuron filters already read over 150 ms"
+                   if abs(d) < spread else ("so the second-scale population dynamics carry part of the information" if d < 0 else "so the population layers were not helping at this budget"))
         txt += (f"Removing the population convolutions, so the network cannot see how the pooled signal evolves over the second, "
-                f"changes balanced accuracy by {d:+.2f}, {'so the second-scale dynamics add little once each neuron has been read over 150 ms' if abs(d) < 0.03 else ('so the second-scale population dynamics carry a real share of the information' if d < 0 else 'which is within the run-to-run spread')}.")
+                f"changes balanced accuracy by {d:+.2f} ({v['no_population'][0]:.2f} ± {v['no_population'][1]:.2f} vs {v['decoder_short'][0]:.2f} ± {v['decoder_short'][1]:.2f}), {verdict}.")
     return txt
 
 
@@ -177,7 +180,7 @@ display(Image("../figures/architecture.png", width=1000))
 md(f"""
 **Training and testing.** Leave-one-rat-out: ten folds, each with one test rat, one validation rat (early stopping) and eight training rats; a rat's sessions always stay together. Each epoch draws the same number of labeled seconds from every training rat and every state, so no rat and no state dominates. The loss is cross-entropy against the authors' label of the second. Width (16 filters) and the number of pooling queries (2) were fixed in advance at the smaller of the candidates I had planned to compare; there was no time left to tune them, so they are untuned choices.
 
-The network sits at chance for the first hundred or so steps before it starts learning. With the shorter ablation budget, a run occasionally never leaves that plateau on its validation rat; such a run is a failed optimization, not a result, so it was restarted with the next random seed ({n_collapsed} of {n_abl_runs + n_collapsed} ablation-budget runs; the failed runs are kept in `results/` under `_collapsed`). None of the ten main folds needed this.
+The network sits at chance for the first hundred or so steps before it starts learning. With the shorter ablation budget, a run occasionally stays near chance on its validation rat (best validation balanced accuracy below 0.40). I treated such a run as a failed optimization rather than a result and restarted it with the next random seed, at most twice, keeping the last attempt either way; this happened {n_collapsed} times in {n_abl_runs + n_collapsed} ablation-budget runs, and the restarted runs are kept in `results/` under `_collapsed`. None of the ten main folds needed this.
 
 **Baseline.** Logistic regression on the same 2.26 s window, but with the raster collapsed to two traces first (spikes per E cell and per I cell in each bin). Bin position within the window is arbitrary, so this model can in practice only read overall E and I firing.
 """)

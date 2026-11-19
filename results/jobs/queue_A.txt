@@ -32,6 +32,6 @@
 --exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test B22
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat19
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20 --seed 2
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Dino
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
