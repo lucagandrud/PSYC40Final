@@ -1,0 +1,215 @@
+{
+ "test_rat": "Dino",
+ "val_rat": "Rizzo",
+ "train_rats": [
+  "B22",
+  "BWRat17",
+  "BWRat18",
+  "BWRat19",
+  "BWRat20",
+  "BWRat21",
+  "Bogey",
+  "Splinter"
+ ],
+ "variant": "E_only",
+ "filters": 16,
+ "queries": 2,
+ "seed": 0,
+ "input": "relative",
+ "norm": false,
+ "lr": 0.001,
+ "n_params": 6275,
+ "best_val_bal_acc": 0.49866666666666665,
+ "epochs": 7,
+ "max_epochs": 10,
+ "min_epochs": 6,
+ "patience": 3,
+ "epoch_size": 128,
+ "best_val_loss": 0.9149666428565979,
+ "train_minutes": 22.665259166558585,
+ "history": [
+  {
+   "epoch": 0,
+   "train_loss": 1.1049028245302348,
+   "val_loss": 1.0924452543258667,
+   "val_bal_acc": 0.35133333333333333,
+   "seconds": 153.85862183570862
+  },
+  {
+   "epoch": 1,
+   "train_loss": 1.0287844985723495,
+   "val_loss": 0.9552228450775146,
+   "val_bal_acc": 0.5153333333333333,
+   "seconds": 151.1617259979248
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.9264621929480479,
+   "val_loss": 1.0622377395629883,
+   "val_bal_acc": 0.41,
+   "seconds": 167.82995200157166
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.8784340281112522,
+   "val_loss": 0.9149666428565979,
+   "val_bal_acc": 0.49866666666666665,
+   "seconds": 150.15412592887878
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.8618908541706892,
+   "val_loss": 0.9525355100631714,
+   "val_bal_acc": 0.498,
+   "seconds": 129.16363501548767
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.864439858840062,
+   "val_loss": 0.962771475315094,
+   "val_bal_acc": 0.516,
+   "seconds": 136.8237099647522
+  },
+  {
+   "epoch": 6,
+   "train_loss": 0.8548123779205176,
+   "val_loss": 1.0438051223754883,
+   "val_bal_acc": 0.4573333333333333,
+   "seconds": 149.4528980255127
+  }
+ ],
+ "rat": {
+  "n": 12742,
+  "balanced_accuracy": 0.5120253013679595,
+  "kappa": 0.4331468122628642,
+  "accuracy": 0.668026997331659,
+  "recall": {
+   "WAKE": 0.9600816932788712,
+   "nonREM": 0.5442850074220683,
+   "REM": 0.0317092034029389
+  },
+  "classes_present": [
+   "WAKE",
+   "nonREM",
+   "REM"
+  ],
+  "confusion": [
+   [
+    5171,
+    67,
+    148
+   ],
+   [
+    2062,
+    3300,
+    701
+   ],
+   [
+    1238,
+    14,
+    41
+   ]
+  ]
+ },
+ "sessions": {
+  "Dino_061814_mPFC": {
+   "n": 7625,
+   "balanced_accuracy": 0.4823886159456969,
+   "kappa": 0.40351706351442884,
+   "accuracy": 0.6912786885245902,
+   "recall": {
+    "WAKE": 0.9711585070285992,
+    "nonREM": 0.44305605141021065,
+    "REM": 0.0329512893982808
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     4007,
+     12,
+     107
+    ],
+    [
+     1179,
+     1241,
+     381
+    ],
+    [
+     675,
+     0,
+     23
+    ]
+   ]
+  },
+  "Dino_061914_ACC": {
+   "n": 2594,
+   "balanced_accuracy": 0.5233502016110712,
+   "kappa": 0.38067914957572724,
+   "accuracy": 0.6237471087124132,
+   "recall": {
+    "WAKE": 0.9492063492063492,
+    "nonREM": 0.6108108108108108,
+    "REM": 0.010033444816053512
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     598,
+     15,
+     17
+    ],
+    [
+     473,
+     1017,
+     175
+    ],
+    [
+     293,
+     3,
+     3
+    ]
+   ]
+  },
+  "Dino_061914_mPFC": {
+   "n": 2523,
+   "balanced_accuracy": 0.5338539205633758,
+   "kappa": 0.3993753312997743,
+   "accuracy": 0.643281807372176,
+   "recall": {
+    "WAKE": 0.8984126984126984,
+    "nonREM": 0.6524733876017533,
+    "REM": 0.05067567567567568
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     566,
+     40,
+     24
+    ],
+    [
+     410,
+     1042,
+     145
+    ],
+    [
+     270,
+     11,
+     15
+    ]
+   ]
+  }
+ }
+}

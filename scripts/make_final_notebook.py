@@ -85,6 +85,26 @@ def ablation_lines():
 
 
 abl_table, abl_vals = ablation_lines()
+
+
+def ablation_sentence():
+    v = abl_vals
+    if not {"decoder_short", "I_only", "E_matched"} <= set(v):
+        return ""
+    txt = (f"With the same training budget, inhibitory cells alone reach {v['I_only'][0]:.2f} balanced accuracy, "
+           f"against {v['decoder_short'][0]:.2f} for all cells and {v['E_matched'][0]:.2f} for the same number of excitatory cells; ")
+    if "E_only" in v:
+        txt += f"all excitatory cells together reach {v['E_only'][0]:.2f}. "
+    txt += ("So a handful of inhibitory cells carries about as much state information as the whole population, and far more "
+            "than an equal handful of excitatory cells, which matches the paper's finding that inhibitory firing tracks state most strongly. ")
+    if "no_population" in v:
+        d = v["no_population"][0] - v["decoder_short"][0]
+        txt += (f"Removing the population convolutions, so the network cannot see how the pooled signal evolves over the second, "
+                f"changes balanced accuracy by {d:+.2f}, {'so the second-scale dynamics add little once each neuron has been read over 150 ms' if abs(d) < 0.03 else ('so the second-scale population dynamics carry a real share of the information' if d < 0 else 'which is within the run-to-run spread')}.")
+    return txt
+
+
+abl_sentence = ablation_sentence()
 n_collapsed = len(list(RES.glob("*/*_collapsed_seed*")))
 try:
     _d = pd.read_csv(RES / "dropping" / "summary.csv"); _g = _d.groupby("k").balanced_accuracy.mean()
@@ -239,7 +259,7 @@ display(Image("../figures/brain3d_still.png", width=800))
 md(f"""
 ## 6. Interpretation, limitations and improvements
 
-**What the results show.** Read from the raster, a network trained on eight rats (a ninth used only to decide when to stop) scores a tenth at {dec} balanced accuracy over the three states (chance 0.33), against {base} for a model that can only read E and I rates, and it wins in {wins("balanced_accuracy")} rats. What transfers across animals is mainly the difference between nonREM and the two activated states: {act} balanced accuracy for nonREM vs WAKE+REM, in every rat above the baseline's {act_b}. nonREM recall is at least 0.73 in nine of ten rats. Telling WAKE from REM with cortical spikes alone is the weak point, and it fails in a rat-specific way: in four rats WAKE recall is 0.76 or higher; in three (Dino, Bogey, BWRat18) it is 0.06 or lower because their waking seconds are called REM; in BWRat17, BWRat21 and Splinter it is 0.24–0.46, with most waking seconds called nonREM. This is the pattern the physiology predicts. nonREM has a signature that is visible in spikes, the alternation of population silence (OFF periods) and activity, while WAKE and REM are both activated cortex with similar firing; the authors themselves separated them with the EMG proxy, which the decoder never sees. The ablation table above says what the network relies on. {drop_txt} Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, though the transition data are too few and too coarse to say more.
+**What the results show.** Read from the raster, a network trained on eight rats (a ninth used only to decide when to stop) scores a tenth at {dec} balanced accuracy over the three states (chance 0.33), against {base} for a model that can only read E and I rates, and it wins in {wins("balanced_accuracy")} rats. What transfers across animals is mainly the difference between nonREM and the two activated states: {act} balanced accuracy for nonREM vs WAKE+REM, in every rat above the baseline's {act_b}. nonREM recall is at least 0.73 in nine of ten rats. Telling WAKE from REM with cortical spikes alone is the weak point, and it fails in a rat-specific way: in four rats WAKE recall is 0.76 or higher; in three (Dino, Bogey, BWRat18) it is 0.06 or lower because their waking seconds are called REM; in BWRat17, BWRat21 and Splinter it is 0.24–0.46, with most waking seconds called nonREM. This is the pattern the physiology predicts. nonREM has a signature that is visible in spikes, the alternation of population silence (OFF periods) and activity, while WAKE and REM are both activated cortex with similar firing; the authors themselves separated them with the EMG proxy, which the decoder never sees. {abl_sentence} {drop_txt} Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, though the transition data are too few and too coarse to say more.
 
 **Limitations.**
 1. *Labels and inputs share signal.* The authors scored states from LFP and an LFP-derived EMG proxy recorded on the same probes as the spikes, so part of what the decoder recovers is the scoring itself.

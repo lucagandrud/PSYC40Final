@@ -120,7 +120,7 @@ def fig_ablations(df: pd.DataFrame):
     ax.set_yticks(range(len(exps))); ax.set_yticklabels([LABEL[e] for e in exps], fontsize=9); ax.invert_yaxis()
     ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("3-class balanced accuracy on held-out rats (mean ± sd; dots = rats)")
     ax.spines[["top", "right"]].set_visible(False)
-    ax.set_title(f"Ablations on {len(abl_rats)} held-out rats ({', '.join(sorted(abl_rats))}): what carries the state information?", fontsize=10.5)
+    ax.set_title(f"Ablations, same training budget, {len(abl_rats)} held-out rats ({', '.join(sorted(abl_rats))})", fontsize=10.5)
     fig.tight_layout(); fig.savefig(FIG / "results_ablations.png", dpi=150)
 
 

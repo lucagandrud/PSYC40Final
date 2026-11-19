@@ -1,0 +1,156 @@
+{
+ "test_rat": "Splinter",
+ "val_rat": "B22",
+ "train_rats": [
+  "BWRat17",
+  "BWRat18",
+  "BWRat19",
+  "BWRat20",
+  "BWRat21",
+  "Bogey",
+  "Dino",
+  "Rizzo"
+ ],
+ "variant": "E_matched",
+ "filters": 16,
+ "queries": 2,
+ "seed": 0,
+ "input": "relative",
+ "norm": false,
+ "lr": 0.001,
+ "n_params": 6275,
+ "best_val_bal_acc": 0.4389922247303737,
+ "epochs": 8,
+ "max_epochs": 10,
+ "min_epochs": 6,
+ "patience": 3,
+ "epoch_size": 128,
+ "best_val_loss": 1.0297647714614868,
+ "train_minutes": 2.5384209156036377,
+ "history": [
+  {
+   "epoch": 0,
+   "train_loss": 1.106503156515268,
+   "val_loss": 1.070043683052063,
+   "val_bal_acc": 0.39688888888888885,
+   "seconds": 12.946001291275024
+  },
+  {
+   "epoch": 1,
+   "train_loss": 1.077074604538771,
+   "val_loss": 1.1076492071151733,
+   "val_bal_acc": 0.41788763481314267,
+   "seconds": 12.9442720413208
+  },
+  {
+   "epoch": 2,
+   "train_loss": 1.052190451667859,
+   "val_loss": 1.1199980974197388,
+   "val_bal_acc": 0.2771286681715575,
+   "seconds": 13.319511890411377
+  },
+  {
+   "epoch": 3,
+   "train_loss": 1.0561679097322316,
+   "val_loss": 1.0741456747055054,
+   "val_bal_acc": 0.442886882367695,
+   "seconds": 13.602712869644165
+  },
+  {
+   "epoch": 4,
+   "train_loss": 1.062575597029466,
+   "val_loss": 1.0297647714614868,
+   "val_bal_acc": 0.4389922247303737,
+   "seconds": 15.627205848693848
+  },
+  {
+   "epoch": 5,
+   "train_loss": 1.0500236371388803,
+   "val_loss": 1.0925143957138062,
+   "val_bal_acc": 0.4534110860295962,
+   "seconds": 18.4067599773407
+  },
+  {
+   "epoch": 6,
+   "train_loss": 1.049877055719787,
+   "val_loss": 1.0638701915740967,
+   "val_bal_acc": 0.43322447955856536,
+   "seconds": 19.924707889556885
+  },
+  {
+   "epoch": 7,
+   "train_loss": 1.055562968347587,
+   "val_loss": 1.164711833000183,
+   "val_bal_acc": 0.37966992726360677,
+   "seconds": 19.666188955307007
+  }
+ ],
+ "rat": {
+  "n": 13252,
+  "balanced_accuracy": 0.46553841190076045,
+  "kappa": 0.32039000646198035,
+  "accuracy": 0.6586930274675521,
+  "recall": {
+   "WAKE": 0.6329179646936657,
+   "nonREM": 0.753358925143954,
+   "REM": 0.010338345864661654
+  },
+  "classes_present": [
+   "WAKE",
+   "nonREM",
+   "REM"
+  ],
+  "confusion": [
+   [
+    2438,
+    1356,
+    58
+   ],
+   [
+    2020,
+    6280,
+    36
+   ],
+   [
+    512,
+    541,
+    11
+   ]
+  ]
+ },
+ "sessions": {
+  "Splinter_020915": {
+   "n": 13252,
+   "balanced_accuracy": 0.46553841190076045,
+   "kappa": 0.32039000646198035,
+   "accuracy": 0.6586930274675521,
+   "recall": {
+    "WAKE": 0.6329179646936657,
+    "nonREM": 0.753358925143954,
+    "REM": 0.010338345864661654
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     2438,
+     1356,
+     58
+    ],
+    [
+     2020,
+     6280,
+     36
+    ],
+    [
+     512,
+     541,
+     11
+    ]
+   ]
+  }
+ }
+}
