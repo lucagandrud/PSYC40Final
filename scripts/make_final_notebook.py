@@ -80,9 +80,11 @@ md("""
 code("""
 import pandas as pd
 qc = pd.read_csv("../reports/qc_table.csv")
-cols = [c for c in qc.columns if c in ("session", "rat", "region", "n_E", "n_I", "wake_min", "nonrem_min", "rem_min", "cleared")]
-display(HTML("<p><b>Sessions used</b> (from the automatic QC table)</p>"))
-display(qc[cols] if cols else qc.iloc[:, :8])
+cols = ["session", "rat", "regions", "n_E", "n_I", "min_WAKE", "min_nonREM", "min_REM", "pct_seconds_scored", "cleared_for_modeling"]
+t = qc[cols].rename(columns={"regions": "region", "min_WAKE": "WAKE (min)", "min_nonREM": "nonREM (min)", "min_REM": "REM (min)",
+                             "pct_seconds_scored": "% scored", "cleared_for_modeling": "cleared"}).round(0)
+display(HTML("<p><b>Sessions used</b> (from the automatic QC table; minutes are the authors' scored time)</p>"))
+display(t.set_index("session"))
 """)
 
 md("""
@@ -155,8 +157,10 @@ display(e.round(3))
 md("""
 ### 5.3 Firing around state boundaries
 
-E and I rates and the paper's synchrony measure (fraction of E cells firing in a 50 ms window, stepped every 25 ms), aligned to the authors' boundaries at 1 s resolution, as a percentage of each session's own baseline (−60 to −30 s), median and interquartile range across sessions. Only microarousals and wake interruptions that directly follow scored sleep are included (227 of 1738 and 288 of 1769); the rest lie in stretches the authors left unscored, where no baseline state is defined. WAKE→SLEEP has 25 events across 17 sessions and SLEEP→WAKE only 3, so those two columns are descriptive.
-""")
+E and I rates and the paper's synchrony measure (fraction of E cells firing in a 50 ms window, stepped every 25 ms), aligned to the authors' boundaries at 1 s resolution, as a percentage of each session's own baseline (−60 to −30 s); median and interquartile range across sessions. The authors define microarousals as up to 40 s of wake-like LFP between nonREM packets and wake interruptions as 40–120 s of wake-like activity during sleep. Only events that directly follow scored sleep are included (227 of 1738 microarousals and 288 of 1769 wake interruptions); the rest lie in stretches the authors left unscored, where no baseline state is defined. WAKE→SLEEP has 25 events across 17 sessions and SLEEP→WAKE only 3, so those two columns are descriptive.
+
+What the curves show: population synchrony jumps at microarousal onset (about +12%), and inhibitory rate rises in the 20 s before it and drops after; before wake interruptions all three traces rise over the preceding 20 s and fall at the scored onset. The changes are small (within ±15% of baseline) and no group's onset latency is reliably earlier than another's (bootstrap intervals in `results/transitions/summary.csv` span the whole window), so at 1 s resolution I cannot say that one cell type leads the scored boundary. The pre-onset rise before wake interruptions may partly reflect REM, which has the highest E rates and often precedes an awakening.
+"""
 code("""
 display(Image("../figures/transitions.png", width=1000))
 t = pd.read_csv("../results/transitions/summary.csv")
@@ -178,7 +182,7 @@ display(Image("../figures/brain3d_still.png", width=800))
 md(f"""
 ## 6. Interpretation, limitations and improvements
 
-**What the results show.** With the raster as input, a network trained on eight rats scores a ninth at {dec} balanced accuracy (chance 0.33), against {base} for a model that can only read E and I rates. So frontal-cortex spiking carries the sleep-wake state in a form that transfers across animals, and most of that information is in *how* cells fire (timing within a second, silences, which cells fire together) rather than in how much. The ablation rows say which parts matter; the neuron-dropping curve says how many cells the readout needs. Around boundaries, inhibitory cells change more than excitatory cells, in line with the paper's finding that I cells track state more strongly, and consistent with cortex following, rather than driving, the subcortical switch.
+**What the results show.** With the raster as input, a network trained on eight rats scores a ninth at {dec} balanced accuracy (chance 0.33), against {base} for a model that can only read E and I rates. So frontal-cortex spiking carries the sleep-wake state in a form that transfers across animals, and most of that information is in *how* cells fire (timing within a second, silences, which cells fire together) rather than in how much. The ablation rows say which parts matter and the neuron-dropping curve says how many cells the readout needs (see the figures above for the numbers; they were still being computed when this text was written, so I kept the text generic). Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, but the transition data here are too few and too coarse to say more.
 
 **Limitations.**
 1. *Labels and inputs share signal.* The authors scored states from LFP and an LFP-derived EMG proxy recorded on the same probes as the spikes, so part of what the decoder recovers is the scoring itself.

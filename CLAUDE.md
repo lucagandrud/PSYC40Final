@@ -220,3 +220,4 @@ For each: use `RecordingFileIntervals` to find the boundary between the recordin
 ## Decisions from the Phase 2 discussion (2026-11-18/19)
 - **Cell groups:** only the authors' E / I labels. No derived groups (the fast/slow split and its ablation were removed).
 - **Rate-only Poisson surrogate:** removed (synthetic, and building it needs the test rat's labels).
+- **Decoder input/training (2026-11-19 01:30):** input = each unit's 10 ms counts divided by its own session mean (label-free; raw counts never left chance). No normalization layers. Early stopping on validation-rat cross-entropy, min 6 epochs, max 12, patience 3. Ablations run at one shorter budget (epoch-size 128, 4–8 epochs) on five rats (B22, BWRat19, BWRat20, Dino, Splinter: one per region) against a full model trained at the same budget (`decoder_short`).

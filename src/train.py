@@ -5,6 +5,9 @@ the validation rat (early stopping and setting choice), and the other 8 train. A
 rat's sessions stay on the same side of the split. The test rat's labels are used only
 to score it.
 
+Early stopping: validation cross-entropy on the validation rat, checked every epoch, no stop
+before MIN_EPOCHS; the state with the lowest validation loss is kept.
+
 Training examples: each epoch draws the same number of labeled seconds from every
 training rat and from every state within a rat (WAKE / nonREM / REM), so no rat and no
 state dominates. The loss is plain cross-entropy on the authors' label of each second.
@@ -33,7 +36,8 @@ RESULTS = ROOT / "results"
 MIN_I_FOR_EI = 3          # sessions with fewer inhibitory cells are skipped in E/I comparisons
 N_PER_CLASS_PER_RAT = 256  # examples drawn per state per training rat per epoch
 BATCH = 64
-MAX_EPOCHS = 15
+MAX_EPOCHS = 12
+MIN_EPOCHS = 6           # no early stop before this many epochs
 PATIENCE = 3
 VAL_PER_CLASS = 500        # validation subsample per state (fixed per run)
 
@@ -157,7 +161,7 @@ def run_fold(args, data, fold, out_dir: Path):
     model = make_model(args)
     opt = torch.optim.Adam(model.parameters(), lr=args.lr)
     vset = val_set(data, fold["val"], args.variant, rng)
-    best, best_state, bad, history = -1.0, None, 0, []
+    best, best_loss, best_state, bad, history = -1.0, np.inf, None, 0, []
     t_start = time.time()
     for epoch in range(MAX_EPOCHS):
         model.train(); t0 = time.time(); losses = []
@@ -166,20 +170,23 @@ def run_fold(args, data, fold, out_dir: Path):
             x = torch.from_numpy(sd.window(secs, rows)); types = torch.from_numpy(sd.types[rows]).long()
             loss = F.cross_entropy(model(x, types), torch.from_numpy(y))
             opt.zero_grad(); loss.backward(); opt.step(); losses.append(loss.item())
-        # validation: balanced accuracy on the validation rat
-        yt, yp = [], []
+        # validation on the validation rat: cross-entropy (the stopping criterion; balanced
+        # accuracy on one rat is too noisy to stop on) and balanced accuracy (reported)
+        yt, yp, pp = [], [], []
         for s, secs in vset:
             sd = data[s]
             p = predict(model, sd, secs, pick_rows(sd, args.variant, rng))
-            yt.append(sd.y[secs]); yp.append(p.argmax(1))
-        v = scores(np.concatenate(yt), np.concatenate(yp))["balanced_accuracy"]
-        history.append(dict(epoch=epoch, train_loss=float(np.mean(losses)), val_bal_acc=v, seconds=time.time() - t0))
-        print(f"  epoch {epoch:2d} loss {np.mean(losses):.3f} val bal.acc {v:.3f} ({time.time()-t0:.0f} s)", flush=True)
-        if v > best:
-            best, bad = v, 0; best_state = {k: t.clone() for k, t in model.state_dict().items()}
+            yt.append(sd.y[secs]); yp.append(p.argmax(1)); pp.append(p)
+        yt_, pp_ = np.concatenate(yt), np.concatenate(pp)
+        v = scores(yt_, np.concatenate(yp))["balanced_accuracy"]
+        vloss = float(-np.log(np.clip(pp_[np.arange(yt_.size), yt_], 1e-9, 1)).mean())
+        history.append(dict(epoch=epoch, train_loss=float(np.mean(losses)), val_loss=vloss, val_bal_acc=v, seconds=time.time() - t0))
+        print(f"  epoch {epoch:2d} loss {np.mean(losses):.3f} val loss {vloss:.3f} bal.acc {v:.3f} ({time.time()-t0:.0f} s)", flush=True)
+        if vloss < best_loss:
+            best_loss, best, bad = vloss, v, 0; best_state = {k: t.clone() for k, t in model.state_dict().items()}
         else:
             bad += 1
-            if bad >= PATIENCE:
+            if bad >= PATIENCE and epoch + 1 >= MIN_EPOCHS:
                 break
     model.load_state_dict(best_state)
     # test: every second of every session of the test rat
@@ -194,7 +201,7 @@ def run_fold(args, data, fold, out_dir: Path):
                    variant=args.variant, filters=args.filters, queries=args.queries, seed=args.seed,
                    input=args.input, norm=args.norm, lr=args.lr,
                    n_params=model.n_params(), best_val_bal_acc=best, epochs=len(history),
-                   max_epochs=MAX_EPOCHS, patience=PATIENCE, epoch_size=N_PER_CLASS_PER_RAT,
+                   max_epochs=MAX_EPOCHS, min_epochs=MIN_EPOCHS, patience=PATIENCE, epoch_size=N_PER_CLASS_PER_RAT, best_val_loss=best_loss,
                    train_minutes=(time.time() - t_start) / 60, history=history,
                    rat=pooled_rat_scores(res) if res else None, sessions=per_session)
     (out_dir / "metrics.json").write_text(json.dumps(metrics, indent=1))
@@ -216,6 +223,7 @@ def main():
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--max-epochs", type=int, default=None)
     ap.add_argument("--patience", type=int, default=None)
+    ap.add_argument("--min-epochs", type=int, default=None)
     ap.add_argument("--epoch-size", type=int, default=None,
                     help="labeled seconds drawn per state per training rat per epoch (default 256)")
     ap.add_argument("--input", default="relative", choices=["counts", "relative"],
@@ -225,9 +233,11 @@ def main():
                     help="predict every second of the test sessions (default: labeled seconds only)")
     ap.add_argument("--lr", type=float, default=1e-3)
     args = ap.parse_args()
-    global MAX_EPOCHS, PATIENCE, N_PER_CLASS_PER_RAT
+    global MAX_EPOCHS, MIN_EPOCHS, PATIENCE, N_PER_CLASS_PER_RAT
     if args.max_epochs:
         MAX_EPOCHS = args.max_epochs
+    if args.min_epochs:
+        MIN_EPOCHS = args.min_epochs
     if args.patience:
         PATIENCE = args.patience
     if args.epoch_size:

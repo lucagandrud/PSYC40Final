@@ -37,7 +37,7 @@ for j, kind in enumerate(kinds):
             ax.set_ylabel(f"{name}\n% change from baseline", fontsize=10)
         if i == 2:
             ax.set_xlabel("time from boundary (s)")
-fig.suptitle("Firing around state boundaries (mean ± sd across sessions; baseline = −60 to −30 s)", fontsize=12)
+fig.suptitle("Firing around state boundaries (median and interquartile range across sessions; baseline = −60 to −30 s)", fontsize=12)
 fig.tight_layout()
 (ROOT / "figures").mkdir(exist_ok=True)
 fig.savefig(ROOT / "figures" / "transitions.png", dpi=150)

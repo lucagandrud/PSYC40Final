@@ -1,22 +1,9 @@
-2026-11-19 01:15:01 queue results/jobs/queue_A.txt: 19 jobs, 4 in parallel
-2026-11-19 01:15:01 start: --exp decoder --filters 16 --queries 2 --test B22 --predict-all
-2026-11-19 01:15:01 start: --exp decoder --filters 16 --queries 2 --test BWRat18 --predict-all
-2026-11-19 01:15:01 start: --exp decoder --filters 16 --queries 2 --test BWRat17 --predict-all
-2026-11-19 01:15:01 start: --exp decoder --filters 16 --queries 2 --test BWRat19 --predict-all
-fold test=BWRat19 val=BWRat20 variant=full C=16 Q=2
-fold test=BWRat18 val=BWRat19 variant=full C=16 Q=2
+2026-11-19 01:32:02 scheduler on results/jobs/queue_A.txt with 4 slots
+2026-11-19 01:32:02 start pid 39666: --exp decoder --filters 16 --queries 2 --test B22 --predict-all
+2026-11-19 01:32:02 start pid 39667: --exp decoder --filters 16 --queries 2 --test BWRat19 --predict-all
+2026-11-19 01:32:02 start pid 39668: --exp decoder --filters 16 --queries 2 --test BWRat20 --predict-all
+2026-11-19 01:32:02 start pid 39669: --exp decoder --filters 16 --queries 2 --test Dino --predict-all
 fold test=B22 val=BWRat17 variant=full C=16 Q=2
-fold test=BWRat17 val=BWRat18 variant=full C=16 Q=2
-  epoch  0 loss 1.098 val bal.acc 0.485 (181 s)
-  epoch  0 loss 1.102 val bal.acc 0.463 (187 s)
-  epoch  0 loss 1.093 val bal.acc 0.517 (190 s)
-  epoch  0 loss 1.105 val bal.acc 0.640 (191 s)
-2026-11-19 01:18:57 scheduler on results/jobs/queue_A.txt with 4 slots
-  epoch  1 loss 0.959 val bal.acc 0.337 (190 s)
-  epoch  1 loss 1.020 val bal.acc 0.607 (197 s)
-  epoch  1 loss 0.953 val bal.acc 0.535 (197 s)
-  epoch  1 loss 1.044 val bal.acc 0.595 (202 s)
-  epoch  2 loss 0.917 val bal.acc 0.441 (198 s)
-  epoch  2 loss 0.981 val bal.acc 0.533 (200 s)
-  epoch  2 loss 0.898 val bal.acc 0.536 (201 s)
-  epoch  2 loss 0.956 val bal.acc 0.531 (212 s)
+fold test=BWRat19 val=BWRat20 variant=full C=16 Q=2
+fold test=Dino val=Rizzo variant=full C=16 Q=2
+fold test=BWRat20 val=BWRat21 variant=full C=16 Q=2

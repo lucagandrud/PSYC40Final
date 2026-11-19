@@ -1,72 +1,48 @@
-# main decoder (10 folds)
+# main decoder (10 folds; one rat per region first)
 --exp decoder --filters 16 --queries 2 --test B22 --predict-all
---exp decoder --filters 16 --queries 2 --test BWRat17 --predict-all
---exp decoder --filters 16 --queries 2 --test BWRat18 --predict-all
 --exp decoder --filters 16 --queries 2 --test BWRat19 --predict-all
 --exp decoder --filters 16 --queries 2 --test BWRat20 --predict-all
+--exp decoder --filters 16 --queries 2 --test Dino --predict-all
+--exp decoder --filters 16 --queries 2 --test Splinter --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat17 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat18 --predict-all
 --exp decoder --filters 16 --queries 2 --test BWRat21 --predict-all
 --exp decoder --filters 16 --queries 2 --test Bogey --predict-all
---exp decoder --filters 16 --queries 2 --test Dino --predict-all
 --exp decoder --filters 16 --queries 2 --test Rizzo --predict-all
---exp decoder --filters 16 --queries 2 --test Splinter --predict-all
-# ablations, one rat per region first, then the rest (cheaper training)
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test B22
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat19
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat20
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Dino
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Splinter
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test B22
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat19
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat20
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Dino
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Splinter
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test B22
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat19
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat20
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Dino
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Splinter
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test B22
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat19
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat20
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Dino
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Splinter
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test B22
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat19
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat20
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Dino
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Splinter
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat17
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat18
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat21
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Bogey
---exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Rizzo
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat17
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat18
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat21
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Bogey
---exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Rizzo
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat17
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat18
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat21
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Bogey
---exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Rizzo
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat17
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat18
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat21
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Bogey
---exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Rizzo
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat17
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat18
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test BWRat21
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Bogey
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --patience 2 --test Rizzo
-# setting checks (run only if time allows)
+# ablations on the five one-per-region rats, all with the same shorter training budget (decoder_short = full model at that budget)
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
+--exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
+--exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
+--exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp E_matched --variant E_matched --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
+# if time allows
+--exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test B22
+--exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat19
+--exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test BWRat20
+--exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Dino
+--exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 8 --min-epochs 4 --patience 2 --test Splinter
 --exp settings_C32_Q2 --filters 32 --queries 2 --test B22
---exp settings_C16_Q1 --filters 16 --queries 1 --test B22
 --exp settings_C16_Q4 --filters 16 --queries 4 --test B22
---exp settings_C32_Q4 --filters 32 --queries 4 --test B22
 --exp settings_C32_Q2 --filters 32 --queries 2 --test BWRat20
---exp settings_C16_Q1 --filters 16 --queries 1 --test BWRat20
 --exp settings_C16_Q4 --filters 16 --queries 4 --test BWRat20
---exp settings_C32_Q4 --filters 32 --queries 4 --test BWRat20
 --exp control_rawcounts --filters 16 --queries 2 --test B22 --input counts

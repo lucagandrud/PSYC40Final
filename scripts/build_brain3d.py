@@ -36,7 +36,7 @@ def main():
     pulse = X.astype(float).copy()
     for k in (1, 2):                                                  # decay over three frames
         pulse[k:] += X[:-k] * (0.5 ** k)
-    size = 4 + 6 * np.minimum(pulse, 3)
+    size = 4 + 5 * np.minimum(pulse, 3)
     strip = {s: state_strip(s, T0, T1) for s in PAIR}
     # ---------------------------------------------------------------- Plotly
     fig = go.Figure()
@@ -83,18 +83,18 @@ def main():
         f.unlink()
     secs = np.arange(int(T0), int(T1))
     for i, t in enumerate(times):
-        fig2 = plt.figure(figsize=(10, 7.2))
-        ax = fig2.add_axes([0.0, 0.18, 1.0, 0.8], projection="3d")
+        fig2 = plt.figure(figsize=(10, 7.6))
+        ax = fig2.add_axes([0.0, 0.2, 1.0, 0.74], projection="3d")
         for region, acronyms in REGION_MAP.items():
             if region not in PAIR.values():
                 continue
-            p = pts[f"pts_{region}"][::6]
-            ax.scatter(p[:, 0], p[:, 2], -p[:, 1], s=1, color="#9aa6b2" if region == "mPFC" else "#c9a27e", alpha=0.12, linewidths=0)
-        ax.scatter(units.ap, units.rl, -units.si, s=size[i] ** 2 * 0.9, c=colors, alpha=0.95, linewidths=0, depthshade=False)
+            p = pts[f"pts_{region}"][::2]
+            ax.scatter(p[:, 0], p[:, 2], -p[:, 1], s=9, color="#8fa3b8" if region == "mPFC" else "#d4a97a", alpha=0.08, linewidths=0, depthshade=False)
+        ax.scatter(units.ap, units.rl, -units.si, s=size[i] ** 2 * 0.35, c=colors, alpha=0.95, linewidths=0, depthshade=False)
         ax.view_init(elev=22, azim=-60 + 0.25 * i)
         ax.set_xlabel("AP (µm)"); ax.set_ylabel("RL (µm)"); ax.set_zlabel("depth (µm)")
-        ax.set_title(f"Dino_061914 mPFC (grey) + ACC (tan) units, t = {t - T0:5.1f} s", fontsize=12)
-        axs = fig2.add_axes([0.08, 0.05, 0.84, 0.1]); axs.set_xlim(T0, T1); axs.set_ylim(0, 2); axs.set_yticks([0.5, 1.5])
+        ax.set_title(f"Dino_061914: mPFC (blue-grey volume) + ACC (tan volume) units, t = {t - T0:5.1f} s", fontsize=12, pad=0)
+        axs = fig2.add_axes([0.08, 0.075, 0.84, 0.1]); axs.set_xlim(T0, T1); axs.set_ylim(0, 2); axs.set_yticks([0.5, 1.5])
         axs.set_yticklabels(["decoder", "authors"]); axs.set_xlabel("session time (s)"); axs.spines[["top", "right"]].set_visible(False)
         for s in PAIR:
             tr = strip[s]["true"]; pr = strip[s].get("pred")
@@ -110,6 +110,8 @@ def main():
         fig2.savefig(fdir / f"f{i:04d}.png", dpi=90)
         if i == 400:
             fig2.savefig(ROOT / "figures" / "brain3d_still.png", dpi=120)
+        if i == 400 and "--still-only" in sys.argv:
+            plt.close(fig2); return
         plt.close(fig2)
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-framerate", "10", "-i", str(fdir / "f%04d.png"),
                     "-c:v", "libx264", "-pix_fmt", "yuv420p", "-vf", "scale=trunc(iw/2)*2:trunc(ih/2)*2", str(OUT / "brain3d.mp4")], check=True)
