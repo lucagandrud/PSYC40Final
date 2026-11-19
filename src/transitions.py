@@ -6,13 +6,19 @@ For every session I compute three 1 s traces from the authors' spikes:
   synchrony   Watson et al. 2016 definition: fraction of excitatory cells firing at least
               one spike in a 50 ms window, stepped every 25 ms, averaged within the second
 and align them (+/- 60 s) to four kinds of boundary taken from the authors' scoring:
-  microarousal onset, wake-interruption onset (many events), and the full WAKE->SLEEP
-  and SLEEP->WAKE switches (few events; descriptive only).
+  microarousal onset, wake-interruption onset, and the full WAKE->SLEEP and SLEEP->WAKE
+  switches (few events; descriptive only).
+Only microarousals and wake interruptions that directly follow scored sleep count (a
+nonREM or REM second within 2 s before onset, and at least 80% of the preceding 30 s
+scored as sleep): 227 of 1738 MAs and 288 of 1769 WIs. The rest sit in stretches the
+authors left unscored, where no baseline state is defined.
 
 Each session's event-average is expressed relative to its own pre-event baseline
-(the mean from -60 to -30 s) so sessions with different firing rates can be averaged;
-sessions are then averaged with equal weight. "Lead" is read from the time at which each
-trace first reaches half of its eventual change, with a bootstrap over sessions.
+(the mean from -60 to -30 s) so sessions with different firing rates can be compared;
+the figure shows the median and interquartile range across sessions (a median, because
+a few sessions have near-silent inhibitory cells and a tiny baseline). Onset latency is
+the first second, from -30 s on, at which the median curve leaves its baseline by more
+than twice the baseline's own standard deviation for three consecutive seconds.
 """
 from __future__ import annotations
 
@@ -78,8 +84,15 @@ def boundaries(sd: SessionData) -> dict[str, np.ndarray]:
     sw = np.where(sleep[:-2] & (wake[1:-1] | wake[2:]))[0] + 1
     def first_of_runs(idx):                               # keep one onset per switch
         return idx[np.r_[True, np.diff(idx) > 2]] if idx.size else idx
-    return {"MA onset": st["MA"][:, 0] if st["MA"].size else np.zeros(0),
-            "WI onset": st["WI"][:, 0] if st["WI"].size else np.zeros(0),
+    def after_sleep(onsets):
+        keep = []
+        for t0 in onsets:
+            a = int(np.floor(t0))
+            if a >= 30 and sleep[a - 2:a].any() and sleep[a - 30:a].mean() >= 0.8:
+                keep.append(t0)
+        return np.array(keep)
+    return {"MA onset": after_sleep(st["MA"][:, 0]) if st["MA"].size else np.zeros(0),
+            "WI onset": after_sleep(st["WI"][:, 0]) if st["WI"].size else np.zeros(0),
             "WAKE->SLEEP": first_of_runs(ws).astype(float),
             "SLEEP->WAKE": first_of_runs(sw).astype(float)}
 
@@ -94,18 +107,17 @@ def align(trace: np.ndarray, onsets: np.ndarray) -> np.ndarray:
     return np.array(out) if out else np.zeros((0, 2 * HALF + 1))
 
 
-def half_change_time(mean_curve: np.ndarray) -> float:
-    """First time (s, relative to onset) the curve covers half the distance from baseline to its
-    post-onset extreme. Baseline = mean over BASE; extreme = max |deviation| in [0, +30] s."""
+def onset_latency(curve: np.ndarray) -> float:
+    """First second (from -30 s on) at which the curve leaves its baseline by more than
+    2 x the baseline's own sd for 3 consecutive seconds; NaN if it never does."""
     t = np.arange(-HALF, HALF + 1)
-    base = mean_curve[(t >= BASE[0]) & (t < BASE[1])].mean()
-    post = mean_curve[(t >= 0) & (t <= 30)]
-    dev = post - base
-    k = np.argmax(np.abs(dev)); target = base + dev[k] / 2
-    seg = mean_curve[(t >= -30) & (t <= t[(t >= 0) & (t <= 30)][k])]
-    tt = t[(t >= -30) & (t <= t[(t >= 0) & (t <= 30)][k])]
-    crossed = np.where((seg - target) * np.sign(dev[k]) >= 0)[0]
-    return float(tt[crossed[0]]) if crossed.size else float("nan")
+    seg = curve[(t >= BASE[0]) & (t < BASE[1])]
+    base, noise = seg.mean(), seg.std()
+    out = np.abs(curve - base) > 2 * max(noise, 1e-9)
+    for i in np.where(t >= -30)[0]:
+        if out[i:i + 3].all():
+            return float(t[i])
+    return float("nan")
 
 
 def main():
@@ -138,16 +150,15 @@ def main():
             if not items:
                 continue
             M = np.array([c for _, c in items])
-            mean = M.mean(0); sd_ = M.std(0)
-            curves[f"{kind}|{name}"] = dict(mean=mean.tolist(), sd=sd_.tolist(), n_sessions=len(items))
-            lat = half_change_time(mean)
-            boot = [half_change_time(M[rng.integers(0, len(M), len(M))].mean(0)) for _ in range(500)]
-            lo, hi = np.nanpercentile(boot, [2.5, 97.5])
+            med = np.median(M, 0); q25, q75 = np.percentile(M, [25, 75], axis=0)
+            curves[f"{kind}|{name}"] = dict(median=med.tolist(), q25=q25.tolist(), q75=q75.tolist(), n_sessions=len(items))
+            lat = onset_latency(med)
+            boot = [onset_latency(np.median(M[rng.integers(0, len(M), len(M))], 0)) for _ in range(300)]
+            lo, hi = np.nanpercentile(boot, [2.5, 97.5]) if np.isfinite(boot).any() else (np.nan, np.nan)
             t = np.arange(-HALF, HALF + 1)
-            post = mean[(t >= 0) & (t <= 30)]; base = mean[(t >= BASE[0]) & (t < BASE[1])].mean()
-            change = post[np.argmax(np.abs(post - base))] / base - 1
-            summary.append(dict(event=kind, trace=name, n_sessions=len(items), peak_change_pct=100 * change,
-                                half_change_s=lat, ci_low=lo, ci_high=hi))
+            change_0_10 = med[(t >= 0) & (t < 10)].mean() - 1
+            summary.append(dict(event=kind, trace=name, n_sessions=len(items), median_change_0_10s_pct=100 * change_0_10,
+                                onset_latency_s=lat, ci_low=lo, ci_high=hi))
     df = pd.DataFrame(summary)
     df.to_csv(OUT / "summary.csv", index=False)
     (OUT / "curves.json").write_text(json.dumps(curves))

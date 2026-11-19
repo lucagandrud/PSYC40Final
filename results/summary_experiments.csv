@@ -1,0 +1,2 @@
+experiment,n_rats,bal_acc_mean,bal_acc_sd,kappa_mean,kappa_sd
+baseline,10,0.417,0.065,0.157,0.116

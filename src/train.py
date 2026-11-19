@@ -194,6 +194,7 @@ def run_fold(args, data, fold, out_dir: Path):
                    variant=args.variant, filters=args.filters, queries=args.queries, seed=args.seed,
                    input=args.input, norm=args.norm, lr=args.lr,
                    n_params=model.n_params(), best_val_bal_acc=best, epochs=len(history),
+                   max_epochs=MAX_EPOCHS, patience=PATIENCE, epoch_size=N_PER_CLASS_PER_RAT,
                    train_minutes=(time.time() - t_start) / 60, history=history,
                    rat=pooled_rat_scores(res) if res else None, sessions=per_session)
     (out_dir / "metrics.json").write_text(json.dumps(metrics, indent=1))
@@ -214,6 +215,9 @@ def main():
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--threads", type=int, default=4)
     ap.add_argument("--max-epochs", type=int, default=None)
+    ap.add_argument("--patience", type=int, default=None)
+    ap.add_argument("--epoch-size", type=int, default=None,
+                    help="labeled seconds drawn per state per training rat per epoch (default 256)")
     ap.add_argument("--input", default="relative", choices=["counts", "relative"],
                     help="counts divided by each unit's own session mean (label-free), or raw spike counts")
     ap.add_argument("--norm", action="store_true", help="normalization layers inside the network (off by default)")
@@ -221,9 +225,13 @@ def main():
                     help="predict every second of the test sessions (default: labeled seconds only)")
     ap.add_argument("--lr", type=float, default=1e-3)
     args = ap.parse_args()
-    global MAX_EPOCHS
+    global MAX_EPOCHS, PATIENCE, N_PER_CLASS_PER_RAT
     if args.max_epochs:
         MAX_EPOCHS = args.max_epochs
+    if args.patience:
+        PATIENCE = args.patience
+    if args.epoch_size:
+        N_PER_CLASS_PER_RAT = args.epoch_size
     data = load_all()
     for sd in data.values():
         sd.input_mode = args.input
