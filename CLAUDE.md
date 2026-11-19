@@ -193,3 +193,14 @@ Recommend one option with reasons; the user decides.
 - Watson BO, Levenstein D, Greene JP, Gelinas JN, Buzsáki G (2016) Neuron 90:839, doi:10.1016/j.neuron.2016.03.036
 - dataset: doi:10.6080/K02N506Q
 - Saper CB, Scammell TE, Lu J (2005) Nature 437:1257, doi:10.1038/nature04284
+
+---
+
+## Updates from the user (2026-11-18, deadline midnight)
+- **Download scope:** 10 rats, up to 3 sessions each; Templeton excluded (authors' notes: "all unstable", "all E & Hippoc too much strange HF noise"). Round-robin queue in `data/manifests/download_queue.txt`: round 1 = one session per rat (BWRat20_101013 and 20140526_277um first), round 2 = second session, round 3 = third. Dino's ACC/mPFC same-day pair counts as 2 of its 3. Within a rat, prefer more units and no instability notes.
+- **Unattended:** `scripts/run_unattended.sh` runs downloads + automatic QC under `caffeinate -i` + `nohup`. Progress: `bash scripts/status.sh`.
+- **Automatic QC:** every session that finishes extracting is inventoried and validated automatically, appended to `reports/qc_table.csv`, and `reports/qc_report.html` is regenerated. Only interrupt the user if a session fails or a check would block modeling.
+- **Dino regions:** Dino ACC and Dino mPFC sessions are distinct recordings with distinct region labels. Never pool or generalize across them without saying so; region effects are confounded with rat.
+- **Time budget (5 h):** 0:00–0:45 Phase 1 on 2 sessions; 0:45–1:15 model discussion; 1:15–2:30 decoder + evaluation; 2:30–3:30 ablations + transitions; 3:30–4:15 3D model; 4:15–5:00 final rerun on all cleared sessions, notebook, push. If behind, cut the rate-only surrogate first, then transitions. Never cut the decoder, the controlled ablations, or the 3D model.
+- **BWRat17** (fear conditioning / shocks): QC and the authors' notes decide usability; report the verdict.
+- **Repo writing:** first person singular ("I"), never "we". Describe only the data actually used; don't mention sessions not downloaded or used.
