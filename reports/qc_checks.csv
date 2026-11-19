@@ -1,22 +1,40 @@
 session,area,check,status,detail
 20140526_277um,Flags,authors' notes applied,PASS,Wake Activity: homecage (no timestamped exclusion in the notes)
-20140526_277um,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
-20140526_277um,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
-20140526_277um,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.16 Hz (paper 0.76); E nonREM 1.14 Hz (paper 0.69); E REM 1.59 Hz (paper 0.88); I WAKE 7.44 Hz (paper 5.59); I nonREM 8.86 Hz (paper 4.69); I REM 8.93 Hz (paper 4.25)
-20140526_277um,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 1, microarousal onsets 55, wake-interruption onsets 18 (authors' episode boundaries, +/-1 s)"
-20140526_277um,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 35.7 min, nonREM 45.9 min, REM 3.0 min (49.8% of seconds scored by authors)"
-20140526_277um,States,state types do not overlap,PASS,no second has two state labels
-20140526_277um,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (13572 s)
-20140526_277um,Anatomy,region agrees with paper Table S1,WARN,"data: mPFC; Table S1 (B22): OFC -> using the per-channel anatomy file (data), conflict noted"
-20140526_277um,Files,files match authors' file list,PASS,"all files present, sizes match"
-20140526_277um,Spikes,units with zero spikes in an analyzed state,PASS,none
-20140526_277um,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 53: 0.16% ISIs <1 ms, 0.78% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-20140526_277um,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 62 units clean (recording end 13572.3 s)
-20140526_277um,Spikes,spike data covers the recording files,PASS,recording-file end not given (inf); last spike 13572.3 s
-20140526_277um,Units,inhibitory units >= 3,PASS,11 inhibitory units
-20140526_277um,Units,E/I labels consistent across authors' files,PASS,62 stable units = 51 E + 11 I; SSubtypes and MeanWaveforms agree
 20140526_277um,Spikes,longest stretch with no spikes from any unit,PASS,0.38 s starting at 2347.9 s
+20140526_277um,Units,E/I labels consistent across authors' files,PASS,62 stable units = 51 E + 11 I; SSubtypes and MeanWaveforms agree
+20140526_277um,Units,inhibitory units >= 3,PASS,11 inhibitory units
+20140526_277um,Spikes,spike data covers the recording files,PASS,recording-file end not given (inf); last spike 13572.3 s
+20140526_277um,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 53: 0.16% ISIs <1 ms, 0.78% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+20140526_277um,Spikes,units with zero spikes in an analyzed state,PASS,none
+20140526_277um,Files,files match authors' file list,PASS,"all files present, sizes match"
+20140526_277um,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 62 units clean (recording end 13572.3 s)
+20140526_277um,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (13572 s)
+20140526_277um,States,state types do not overlap,PASS,no second has two state labels
+20140526_277um,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 35.7 min, nonREM 45.9 min, REM 3.0 min (49.8% of seconds scored by authors)"
+20140526_277um,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.16 Hz (paper 0.76); E nonREM 1.14 Hz (paper 0.69); E REM 1.59 Hz (paper 0.88); I WAKE 7.44 Hz (paper 5.59); I nonREM 8.86 Hz (paper 4.69); I REM 8.93 Hz (paper 4.25)
+20140526_277um,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
+20140526_277um,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+20140526_277um,Anatomy,region agrees with paper Table S1,WARN,"data: mPFC; Table S1 (B22): OFC -> using the per-channel anatomy file (data), conflict noted"
+20140526_277um,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 1, microarousal onsets 55, wake-interruption onsets 18 (authors' episode boundaries, +/-1 s)"
+20140528_565um,Spikes,longest stretch with no spikes from any unit,PASS,0.52 s starting at 8443.4 s
+20140528_565um,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 13.2 min, nonREM 45.8 min, REM 8.7 min (42.3% of seconds scored by authors)"
+20140528_565um,Units,E/I labels consistent across authors' files,PASS,33 stable units = 27 E + 6 I; SSubtypes and MeanWaveforms agree
+20140528_565um,Units,inhibitory units >= 3,PASS,6 inhibitory units
+20140528_565um,Spikes,spike data covers the recording files,PASS,recording-file end not given (inf); last spike 12395.7 s
+20140528_565um,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 27: 0.08% ISIs <1 ms, 0.31% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+20140528_565um,Spikes,units with zero spikes in an analyzed state,PASS,none
+20140528_565um,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
+20140528_565um,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 33 units clean (recording end 12395.7 s)
+20140528_565um,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 29, wake-interruption onsets 22 (authors' episode boundaries, +/-1 s)"
+20140528_565um,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.26 Hz (paper 0.76); E nonREM 1.04 Hz (paper 0.69); E REM 1.79 Hz (paper 0.88); I WAKE 5.07 Hz (paper 5.59); I nonREM 6.88 Hz (paper 4.69); I REM 8.73 Hz (paper 4.25)
+20140528_565um,Files,files match authors' file list,PASS,"all files present, sizes match"
+20140528_565um,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+20140528_565um,Anatomy,region agrees with paper Table S1,WARN,"data: mPFC; Table S1 (B22): OFC -> using the per-channel anatomy file (data), conflict noted"
+20140528_565um,Flags,authors' notes applied,PASS,Wake Activity: homecage (no timestamped exclusion in the notes)
+20140528_565um,States,state types do not overlap,PASS,no second has two state labels
+20140528_565um,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (12396 s)
 BWRat17_121712,Units,inhibitory units >= 3,PASS,7 inhibitory units
+BWRat17_121712,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear | Other Notes: Shock... somewhat unstable (no timestamped exclusion in the notes)
 BWRat17_121712,Spikes,spike data covers the recording files,PASS,"last spike 6059.4 s, recording files end 6059.4 s"
 BWRat17_121712,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 50 units clean (recording end 6059.4 s)
 BWRat17_121712,States,state types do not overlap,PASS,no second has two state labels
@@ -24,49 +42,50 @@ BWRat17_121712,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS
 BWRat17_121712,Spikes,units with zero spikes in an analyzed state,WARN,WAKE: units [36]; REM: units [33] (listed only; nothing excluded)
 BWRat17_121712,Spikes,longest stretch with no spikes from any unit,PASS,0.75 s starting at 3148.4 s
 BWRat17_121712,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 40.4 min, nonREM 15.9 min, REM 1.7 min (68.6% of seconds scored by authors)"
-BWRat17_121712,Units,E/I labels consistent across authors' files,PASS,50 stable units = 43 E + 7 I; SSubtypes and MeanWaveforms agree
 BWRat17_121712,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.57 Hz (paper 0.76); E nonREM 0.38 Hz (paper 0.69); E REM 0.50 Hz (paper 0.88); I WAKE 3.67 Hz (paper 5.59); I nonREM 2.37 Hz (paper 4.69); I REM 2.82 Hz (paper 4.25)
 BWRat17_121712,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 10, wake-interruption onsets 9 (authors' episode boundaries, +/-1 s)"
 BWRat17_121712,Anatomy,every unit maps to one region via its shank,PASS,regions: ACC
 BWRat17_121712,Files,files match authors' file list,PASS,"all files present, sizes match"
 BWRat17_121712,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
-BWRat17_121712,States,scored states lie within the spike recording,WARN,"MA 10 s, WI 89 s scored after the spike recording ends at 6059 s -> not used"
 BWRat17_121712,Anatomy,region agrees with paper Table S1,PASS,data: ACC; Table S1 (BWRat17): ACC
-BWRat17_121712,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear | Other Notes: Shock... somewhat unstable (no timestamped exclusion in the notes)
+BWRat17_121712,States,scored states lie within the spike recording,WARN,"MA 10 s, WI 89 s scored after the spike recording ends at 6059 s -> not used"
+BWRat17_121712,Units,E/I labels consistent across authors' files,PASS,50 stable units = 43 E + 7 I; SSubtypes and MeanWaveforms agree
+BWRat17_121912,Files,files match authors' file list,PASS,"all files present, sizes match"
 BWRat17_121912,Anatomy,every unit maps to one region via its shank,PASS,regions: ACC
 BWRat17_121912,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 70, wake-interruption onsets 42 (authors' episode boundaries, +/-1 s)"
-BWRat17_121912,States,state types do not overlap,PASS,no second has two state labels
-BWRat17_121912,States,scored states lie within the spike recording,WARN,"MA 442 s, WI 632 s scored after the spike recording ends at 6535 s -> not used"
-BWRat17_121912,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear | Other Notes: Obs Fear stable units (no timestamped exclusion in the notes)
-BWRat17_121912,Anatomy,region agrees with paper Table S1,PASS,data: ACC; Table S1 (BWRat17): ACC
+BWRat17_121912,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 35 units clean (recording end 6534.7 s)
+BWRat17_121912,Units,inhibitory units >= 3,WARN,1 inhibitory units (skip this session in the E-vs-I ablation)
+BWRat17_121912,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 29: 0.04% ISIs <1 ms, 0.04% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+BWRat17_121912,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 19.7 min, nonREM 41.8 min, REM 3.8 min (84.6% of seconds scored by authors)"
+BWRat17_121912,Spikes,units with zero spikes in an analyzed state,PASS,none
+BWRat17_121912,Units,E/I labels consistent across authors' files,PASS,35 stable units = 34 E + 1 I; SSubtypes and MeanWaveforms agree
 BWRat17_121912,Spikes,longest stretch with no spikes from any unit,PASS,0.76 s starting at 5242.9 s
 BWRat17_121912,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
-BWRat17_121912,Physiology,median rates vs Watson 2016 (comparison only),PASS,"E WAKE 0.63 Hz (paper 0.76); E nonREM 0.56 Hz (paper 0.69); E REM 0.62 Hz (paper 0.88); I WAKE 8.21 Hz (paper 5.59); I nonREM 11.67 Hz (paper 4.69); I REM 15.42 Hz (paper 4.25) (I medians: <3 cells, not judged)"
-BWRat17_121912,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat17_121912,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 19.7 min, nonREM 41.8 min, REM 3.8 min (84.6% of seconds scored by authors)"
-BWRat17_121912,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 29: 0.04% ISIs <1 ms, 0.04% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-BWRat17_121912,Units,E/I labels consistent across authors' files,PASS,35 stable units = 34 E + 1 I; SSubtypes and MeanWaveforms agree
-BWRat17_121912,Spikes,units with zero spikes in an analyzed state,PASS,none
-BWRat17_121912,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 35 units clean (recording end 6534.7 s)
 BWRat17_121912,Spikes,spike data covers the recording files,PASS,"last spike 6534.7 s, recording files end 6534.7 s"
-BWRat17_121912,Units,inhibitory units >= 3,WARN,1 inhibitory units (skip this session in the E-vs-I ablation)
-BWRat18_020513,States,scored states lie within the spike recording,WARN,"nonREM 1 s, MA 491 s, WI 914 s scored after the spike recording ends at 7590 s -> not used"
-BWRat18_020513,Units,E/I labels consistent across authors' files,PASS,40 stable units = 34 E + 6 I; SSubtypes and MeanWaveforms agree
-BWRat18_020513,Units,inhibitory units >= 3,PASS,6 inhibitory units
-BWRat18_020513,Spikes,spike data covers the recording files,WARN,"last spike 7590.5 s, recording files end 9388.8 s -> 1798 s at the end have no spike data and are not used"
-BWRat18_020513,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 40 units clean (recording end 9388.8 s)
-BWRat18_020513,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 27: 0.01% ISIs <1 ms, 0.03% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-BWRat18_020513,Spikes,units with zero spikes in an analyzed state,WARN,REM: units [28] (listed only; nothing excluded)
-BWRat18_020513,Spikes,longest stretch with no spikes from any unit,PASS,1.60 s starting at 7081.7 s
-BWRat18_020513,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 33.5 min, nonREM 69.3 min, REM 10.2 min (97.0% of seconds scored by authors)"
-BWRat18_020513,States,state types do not overlap,WARN,"WAKE&MA 9 s, WAKE&WI 81 s -> marked AMBIGUOUS, excluded from modeling"
-BWRat18_020513,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 33, wake-interruption onsets 39 (authors' episode boundaries, +/-1 s)"
+BWRat17_121912,States,state types do not overlap,PASS,no second has two state labels
+BWRat17_121912,Physiology,median rates vs Watson 2016 (comparison only),PASS,"E WAKE 0.63 Hz (paper 0.76); E nonREM 0.56 Hz (paper 0.69); E REM 0.62 Hz (paper 0.88); I WAKE 8.21 Hz (paper 5.59); I nonREM 11.67 Hz (paper 4.69); I REM 15.42 Hz (paper 4.25) (I medians: <3 cells, not judged)"
+BWRat17_121912,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear | Other Notes: Obs Fear stable units (no timestamped exclusion in the notes)
+BWRat17_121912,Anatomy,region agrees with paper Table S1,PASS,data: ACC; Table S1 (BWRat17): ACC
+BWRat17_121912,States,scored states lie within the spike recording,WARN,"MA 442 s, WI 632 s scored after the spike recording ends at 6535 s -> not used"
 BWRat18_020513,Physiology,median rates vs Watson 2016 (comparison only),WARN,E WAKE 0.67 Hz (paper 0.76); E nonREM 0.44 Hz (paper 0.69); E REM 0.25 Hz (paper 0.88); I WAKE 1.92 Hz (paper 5.59); I nonREM 0.15 Hz (paper 4.69); I REM 0.06 Hz (paper 4.25); I median <= E median in nonREM; I median <= E median in REM
-BWRat18_020513,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat18_020513,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
-BWRat18_020513,Anatomy,region agrees with paper Table S1,PASS,data: M2; Table S1 (BWRat18): M2
+BWRat18_020513,States,state types do not overlap,WARN,"WAKE&MA 9 s, WAKE&WI 81 s -> marked AMBIGUOUS, excluded from modeling"
+BWRat18_020513,Units,E/I labels consistent across authors' files,PASS,40 stable units = 34 E + 6 I; SSubtypes and MeanWaveforms agree
 BWRat18_020513,Flags,authors' notes applied,PASS,"authors: 'Big Instabilities at 7650s(?) & 9700s(shocks) in ctx units' -> cut at 7650 s (exclude t >= 7650 s); after it: 0 spikes, 0 scored seconds; GoodSleepInterval ends 7591 s; no data after the cut (nothing affected)"
+BWRat18_020513,Anatomy,region agrees with paper Table S1,PASS,data: M2; Table S1 (BWRat18): M2
+BWRat18_020513,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+BWRat18_020513,Files,files match authors' file list,PASS,"all files present, sizes match"
+BWRat18_020513,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 33, wake-interruption onsets 39 (authors' episode boundaries, +/-1 s)"
+BWRat18_020513,States,scored states lie within the spike recording,WARN,"nonREM 1 s, MA 491 s, WI 914 s scored after the spike recording ends at 7590 s -> not used"
+BWRat18_020513,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 33.5 min, nonREM 69.3 min, REM 10.2 min (97.0% of seconds scored by authors)"
+BWRat18_020513,Spikes,longest stretch with no spikes from any unit,PASS,1.60 s starting at 7081.7 s
+BWRat18_020513,Spikes,units with zero spikes in an analyzed state,WARN,REM: units [28] (listed only; nothing excluded)
+BWRat18_020513,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 27: 0.01% ISIs <1 ms, 0.03% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+BWRat18_020513,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 40 units clean (recording end 9388.8 s)
+BWRat18_020513,Spikes,spike data covers the recording files,WARN,"last spike 7590.5 s, recording files end 9388.8 s -> 1798 s at the end have no spike data and are not used"
+BWRat18_020513,Units,inhibitory units >= 3,PASS,6 inhibitory units
 BWRat18_020513,Anatomy,every unit maps to one region via its shank,PASS,regions: M2
+BWRat19_032413,Spikes,spike data covers the recording files,PASS,"last spike 5013.4 s, recording files end 5013.4 s"
+BWRat19_032413,Spikes,longest stretch with no spikes from any unit,PASS,0.81 s starting at 3790.8 s
 BWRat19_032413,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 57, wake-interruption onsets 27 (authors' episode boundaries, +/-1 s)"
 BWRat19_032413,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 30.6 min, nonREM 28.9 min, REM 0.0 min (85.8% of seconds scored by authors)"
 BWRat19_032413,States,state types do not overlap,WARN,"WAKE&MA 47 s, WAKE&WI 115 s -> marked AMBIGUOUS, excluded from modeling"
@@ -74,60 +93,58 @@ BWRat19_032413,Anatomy,region agrees with paper Table S1,PASS,data: M2; Table S1
 BWRat19_032413,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
 BWRat19_032413,Anatomy,every unit maps to one region via its shank,PASS,regions: M2
 BWRat19_032413,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear (no timestamped exclusion in the notes)
-BWRat19_032413,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.32 Hz (paper 0.76); E nonREM 0.89 Hz (paper 0.69); I WAKE 4.25 Hz (paper 5.59); I nonREM 3.87 Hz (paper 4.69)
-BWRat19_032413,Spikes,spike data covers the recording files,PASS,"last spike 5013.4 s, recording files end 5013.4 s"
 BWRat19_032413,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 50 units clean (recording end 5013.4 s)
 BWRat19_032413,Units,inhibitory units >= 3,PASS,13 inhibitory units
 BWRat19_032413,Units,E/I labels consistent across authors' files,PASS,50 stable units = 37 E + 13 I; SSubtypes and MeanWaveforms agree
 BWRat19_032413,Spikes,units with zero spikes in an analyzed state,PASS,none
 BWRat19_032413,States,scored states lie within the spike recording,WARN,"MA 455 s, WI 688 s scored after the spike recording ends at 5013 s -> not used"
 BWRat19_032413,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat19_032413,Spikes,longest stretch with no spikes from any unit,PASS,0.81 s starting at 3790.8 s
 BWRat19_032413,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 25: 0.18% ISIs <1 ms, 0.63% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-BWRat19_032513,Units,inhibitory units >= 3,PASS,10 inhibitory units
-BWRat19_032513,Units,E/I labels consistent across authors' files,PASS,61 stable units = 51 E + 10 I; SSubtypes and MeanWaveforms agree
-BWRat19_032513,Spikes,longest stretch with no spikes from any unit,PASS,0.65 s starting at 3472.6 s
-BWRat19_032513,Spikes,units with zero spikes in an analyzed state,PASS,none
-BWRat19_032513,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 41: 0.05% ISIs <1 ms, 0.19% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-BWRat19_032513,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 7.5 min, nonREM 18.1 min, REM 3.8 min (62.0% of seconds scored by authors)"
-BWRat19_032513,Spikes,spike data covers the recording files,PASS,"last spike 3928.8 s, recording files end 3928.8 s"
-BWRat19_032513,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 61 units clean (recording end 3928.8 s)
-BWRat19_032513,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat19_032513,Anatomy,region agrees with paper Table S1,PASS,data: M2; Table S1 (BWRat19): M2
-BWRat19_032513,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+BWRat19_032413,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.32 Hz (paper 0.76); E nonREM 0.89 Hz (paper 0.69); I WAKE 4.25 Hz (paper 5.59); I nonREM 3.87 Hz (paper 4.69)
+BWRat19_032513,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.96 Hz (paper 0.76); E nonREM 0.69 Hz (paper 0.69); E REM 1.03 Hz (paper 0.88); I WAKE 9.57 Hz (paper 5.59); I nonREM 6.09 Hz (paper 4.69); I REM 10.69 Hz (paper 4.25)
 BWRat19_032513,States,scored states lie within the spike recording,WARN,"MA 350 s, WI 615 s scored after the spike recording ends at 3929 s -> not used"
 BWRat19_032513,Anatomy,every unit maps to one region via its shank,PASS,regions: M2
-BWRat19_032513,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.96 Hz (paper 0.76); E nonREM 0.69 Hz (paper 0.69); E REM 1.03 Hz (paper 0.88); I WAKE 9.57 Hz (paper 5.59); I nonREM 6.09 Hz (paper 4.69); I REM 10.69 Hz (paper 4.25)
+BWRat19_032513,Anatomy,region agrees with paper Table S1,PASS,data: M2; Table S1 (BWRat19): M2
 BWRat19_032513,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 40, wake-interruption onsets 45 (authors' episode boundaries, +/-1 s)"
 BWRat19_032513,States,state types do not overlap,PASS,no second has two state labels
+BWRat19_032513,Units,E/I labels consistent across authors' files,PASS,61 stable units = 51 E + 10 I; SSubtypes and MeanWaveforms agree
+BWRat19_032513,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+BWRat19_032513,Units,inhibitory units >= 3,PASS,10 inhibitory units
+BWRat19_032513,Spikes,spike data covers the recording files,PASS,"last spike 3928.8 s, recording files end 3928.8 s"
+BWRat19_032513,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 7.5 min, nonREM 18.1 min, REM 3.8 min (62.0% of seconds scored by authors)"
+BWRat19_032513,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 41: 0.05% ISIs <1 ms, 0.19% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+BWRat19_032513,Spikes,units with zero spikes in an analyzed state,PASS,none
+BWRat19_032513,Spikes,longest stretch with no spikes from any unit,PASS,0.65 s starting at 3472.6 s
 BWRat19_032513,Flags,authors' notes applied,PASS,Wake Activity: ObsCage&ObsFear | Other Notes: Some assemblies turn on A LOT when  put in obs cage... specific response (no timestamped exclusion in the notes)
+BWRat19_032513,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 61 units clean (recording end 3928.8 s)
+BWRat19_032513,Files,files match authors' file list,PASS,"all files present, sizes match"
+BWRat20_101013,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 44, wake-interruption onsets 24 (authors' episode boundaries, +/-1 s)"
+BWRat20_101013,Files,files match authors' file list,PASS,"all files present, sizes match"
+BWRat20_101013,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+BWRat20_101013,States,state types do not overlap,PASS,no second has two state labels
 BWRat20_101013,Flags,authors' notes applied,PASS,Wake Activity: homecage | Other Notes: ndm_start processing (no timestamped exclusion in the notes)
 BWRat20_101013,Spikes,longest stretch with no spikes from any unit,PASS,0.76 s starting at 11267.7 s
 BWRat20_101013,Anatomy,every unit maps to one region via its shank,PASS,regions: ACC
-BWRat20_101013,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 44, wake-interruption onsets 24 (authors' episode boundaries, +/-1 s)"
 BWRat20_101013,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 11.8 min, nonREM 32.4 min, REM 10.9 min (31.2% of seconds scored by authors)"
-BWRat20_101013,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat20_101013,States,state types do not overlap,PASS,no second has two state labels
 BWRat20_101013,States,scored states lie within the spike recording,WARN,"MA 281 s, WI 578 s scored after the spike recording ends at 13364 s -> not used"
-BWRat20_101013,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+BWRat20_101013,Anatomy,region agrees with paper Table S1,PASS,data: ACC; Table S1 (BWRat20): ACC
+BWRat20_101013,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 22 units clean (recording end 13364.3 s)
 BWRat20_101013,Units,E/I labels consistent across authors' files,PASS,22 stable units = 17 E + 5 I; SSubtypes and MeanWaveforms agree
 BWRat20_101013,Units,inhibitory units >= 3,PASS,5 inhibitory units
 BWRat20_101013,Spikes,spike data covers the recording files,PASS,"last spike 13364.3 s, recording files end 13364.3 s"
 BWRat20_101013,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 2.04 Hz (paper 0.76); E nonREM 1.02 Hz (paper 0.69); E REM 2.52 Hz (paper 0.88); I WAKE 7.03 Hz (paper 5.59); I nonREM 6.73 Hz (paper 4.69); I REM 10.56 Hz (paper 4.25)
 BWRat20_101013,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 5: 0.04% ISIs <1 ms, 0.12% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
 BWRat20_101013,Spikes,units with zero spikes in an analyzed state,PASS,none
-BWRat20_101013,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 22 units clean (recording end 13364.3 s)
-BWRat20_101013,Anatomy,region agrees with paper Table S1,PASS,data: ACC; Table S1 (BWRat20): ACC
+BWRat21_121113,Spikes,spike data covers the recording files,PASS,"last spike 21883.2 s, recording files end 21883.2 s"
+BWRat21_121113,Units,inhibitory units >= 3,PASS,4 inhibitory units
+BWRat21_121113,Files,files match authors' file list,PASS,"all files present, sizes match"
+BWRat21_121113,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.76 Hz (paper 0.76); E nonREM 0.65 Hz (paper 0.69); E REM 1.19 Hz (paper 0.88); I WAKE 6.81 Hz (paper 5.59); I nonREM 4.13 Hz (paper 4.69); I REM 5.15 Hz (paper 4.25)
 BWRat21_121113,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
 BWRat21_121113,States,scored states lie within the spike recording,WARN,"MA 1131 s, WI 2233 s scored after the spike recording ends at 21883 s -> not used"
-BWRat21_121113,Files,files match authors' file list,PASS,"all files present, sizes match"
-BWRat21_121113,Units,E/I labels consistent across authors' files,PASS,32 stable units = 28 E + 4 I; SSubtypes and MeanWaveforms agree
-BWRat21_121113,Units,inhibitory units >= 3,PASS,4 inhibitory units
-BWRat21_121113,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 32 units clean (recording end 21883.2 s)
 BWRat21_121113,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 16: 0.03% ISIs <1 ms, 0.18% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+BWRat21_121113,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 32 units clean (recording end 21883.2 s)
+BWRat21_121113,Units,E/I labels consistent across authors' files,PASS,32 stable units = 28 E + 4 I; SSubtypes and MeanWaveforms agree
 BWRat21_121113,Spikes,units with zero spikes in an analyzed state,PASS,none
-BWRat21_121113,Spikes,spike data covers the recording files,PASS,"last spike 21883.2 s, recording files end 21883.2 s"
-BWRat21_121113,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.76 Hz (paper 0.76); E nonREM 0.65 Hz (paper 0.69); E REM 1.19 Hz (paper 0.88); I WAKE 6.81 Hz (paper 5.59); I nonREM 4.13 Hz (paper 4.69); I REM 5.15 Hz (paper 4.25)
 BWRat21_121113,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
 BWRat21_121113,Spikes,longest stretch with no spikes from any unit,PASS,0.88 s starting at 8000.1 s
 BWRat21_121113,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 35.2 min, nonREM 56.5 min, REM 21.3 min (45.6% of seconds scored by authors)"
@@ -135,71 +152,105 @@ BWRat21_121113,Flags,authors' notes applied,PASS,"authors: 'Used only until UNST
 BWRat21_121113,Anatomy,region agrees with paper Table S1,PASS,data: mPFC; Table S1 (BWRat21): mPFC
 BWRat21_121113,States,state types do not overlap,WARN,"WAKE&WI 39 s -> marked AMBIGUOUS, excluded from modeling"
 BWRat21_121113,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 130, wake-interruption onsets 154 (authors' episode boundaries, +/-1 s)"
-Bogey_012615,States,transitions and events,PASS,"WAKE->SLEEP 3, SLEEP->WAKE 0, microarousal onsets 73, wake-interruption onsets 83 (authors' episode boundaries, +/-1 s)"
+BWRat21_121813,Anatomy,region agrees with paper Table S1,PASS,data: mPFC; Table S1 (BWRat21): mPFC
+BWRat21_121813,Flags,authors' notes applied,PASS,"authors: 'saline btw 05&06' -> cut at 21706 s (injection between files 5&6: exclude t >= end of file 5 (21705.8 s)); after it: 0 spikes, 0 scored seconds; GoodSleepInterval ends 21706 s; no data after the cut (nothing affected)"
+BWRat21_121813,States,state types do not overlap,WARN,"WAKE&WI 310 s -> marked AMBIGUOUS, excluded from modeling"
+BWRat21_121813,Spikes,longest stretch with no spikes from any unit,PASS,6.11 s starting at 18095.9 s
+BWRat21_121813,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
+BWRat21_121813,States,transitions and events,PASS,"WAKE->SLEEP 3, SLEEP->WAKE 0, microarousal onsets 176, wake-interruption onsets 355 (authors' episode boundaries, +/-1 s)"
+BWRat21_121813,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 105.1 min, nonREM 127.8 min, REM 57.6 min (89.4% of seconds scored by authors)"
+BWRat21_121813,States,scored states lie within the spike recording,WARN,"REM 0 s, MA 2156 s, WI 6922 s scored after the spike recording ends at 21706 s -> not used"
+BWRat21_121813,Physiology,median rates vs Watson 2016 (comparison only),PASS,"E WAKE 0.40 Hz (paper 0.76); E nonREM 1.03 Hz (paper 0.69); E REM 0.99 Hz (paper 0.88); I WAKE 0.19 Hz (paper 5.59); I nonREM 0.13 Hz (paper 4.69); I REM 0.16 Hz (paper 4.25) (I medians: <3 cells, not judged)"
+BWRat21_121813,Spikes,units with zero spikes in an analyzed state,PASS,none
+BWRat21_121813,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 7: 0.02% ISIs <1 ms, 0.09% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+BWRat21_121813,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 12 units clean (recording end 21705.8 s)
+BWRat21_121813,Spikes,spike data covers the recording files,PASS,"last spike 21705.6 s, recording files end 21705.8 s"
+BWRat21_121813,Units,inhibitory units >= 3,WARN,1 inhibitory units (skip this session in the E-vs-I ablation)
+BWRat21_121813,Units,E/I labels consistent across authors' files,PASS,12 stable units = 11 E + 1 I; SSubtypes and MeanWaveforms agree
+BWRat21_121813,Files,files match authors' file list,PASS,"all files present, sizes match"
+BWRat21_121813,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+Bogey_012615,States,state types do not overlap,WARN,"WAKE&MA 25 s, WAKE&WI 159 s -> marked AMBIGUOUS, excluded from modeling"
+Bogey_012615,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 32: 0.04% ISIs <1 ms, 0.10% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
 Bogey_012615,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 57.7 min, nonREM 108.7 min, REM 13.1 min (62.0% of seconds scored by authors)"
 Bogey_012615,Flags,authors' notes applied,PASS,no notes (no timestamped exclusion in the notes)
 Bogey_012615,Files,files match authors' file list,PASS,"all files present, sizes match"
+Bogey_012615,States,transitions and events,PASS,"WAKE->SLEEP 3, SLEEP->WAKE 0, microarousal onsets 73, wake-interruption onsets 83 (authors' episode boundaries, +/-1 s)"
 Bogey_012615,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (24263 s)
 Bogey_012615,Anatomy,region agrees with paper Table S1,PASS,data: mPFC; Table S1 (Bogey): mPFC
-Bogey_012615,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.81 Hz (paper 0.76); E nonREM 0.75 Hz (paper 0.69); E REM 0.91 Hz (paper 0.88); I WAKE 3.18 Hz (paper 5.59); I nonREM 2.72 Hz (paper 4.69); I REM 4.04 Hz (paper 4.25)
+Bogey_012615,Spikes,units with zero spikes in an analyzed state,PASS,none
 Bogey_012615,Spikes,spike data covers the recording files,WARN,"last spike 24263.4 s, recording files end 24625.3 s -> 362 s at the end have no spike data and are not used"
 Bogey_012615,Spikes,longest stretch with no spikes from any unit,PASS,0.78 s starting at 14834.6 s
 Bogey_012615,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
 Bogey_012615,Units,inhibitory units >= 3,PASS,3 inhibitory units
 Bogey_012615,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 36 units clean (recording end 24625.3 s)
 Bogey_012615,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
-Bogey_012615,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 32: 0.04% ISIs <1 ms, 0.10% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-Bogey_012615,Spikes,units with zero spikes in an analyzed state,PASS,none
-Bogey_012615,States,state types do not overlap,WARN,"WAKE&MA 25 s, WAKE&WI 159 s -> marked AMBIGUOUS, excluded from modeling"
 Bogey_012615,Units,E/I labels consistent across authors' files,PASS,36 stable units = 33 E + 3 I; SSubtypes and MeanWaveforms agree
-Dino_061914_mPFC,States,scored states lie within the spike recording,WARN,"MA 186 s, WI 554 s scored after the spike recording ends at 17520 s -> not used"
-Dino_061914_mPFC,Units,E/I labels consistent across authors' files,PASS,60 stable units = 55 E + 5 I; SSubtypes and MeanWaveforms agree
-Dino_061914_mPFC,Units,inhibitory units >= 3,PASS,5 inhibitory units
-Dino_061914_mPFC,Spikes,spike data covers the recording files,PASS,"last spike 17519.5 s, recording files end 17519.5 s"
-Dino_061914_mPFC,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 60 units clean (recording end 17519.5 s)
-Dino_061914_mPFC,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 4: 0.05% ISIs <1 ms, 0.23% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
-Dino_061914_mPFC,Spikes,units with zero spikes in an analyzed state,PASS,none
+Bogey_012615,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.81 Hz (paper 0.76); E nonREM 0.75 Hz (paper 0.69); E REM 0.91 Hz (paper 0.88); I WAKE 3.18 Hz (paper 5.59); I nonREM 2.72 Hz (paper 4.69); I REM 4.04 Hz (paper 4.25)
+Dino_061914_ACC,Units,inhibitory units >= 3,PASS,6 inhibitory units
+Dino_061914_ACC,Spikes,spike data covers the recording files,PASS,"last spike 17519.5 s, recording files end 17519.5 s"
+Dino_061914_ACC,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 52 units clean (recording end 17519.5 s)
+Dino_061914_ACC,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 12: 0.04% ISIs <1 ms, 0.06% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+Dino_061914_ACC,Spikes,units with zero spikes in an analyzed state,PASS,none
+Dino_061914_ACC,Spikes,longest stretch with no spikes from any unit,PASS,0.86 s starting at 6725.8 s
+Dino_061914_ACC,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 10.5 min, nonREM 27.8 min, REM 5.0 min (21.5% of seconds scored by authors)"
+Dino_061914_ACC,States,scored states lie within the spike recording,WARN,"MA 199 s, WI 521 s scored after the spike recording ends at 17520 s -> not used"
+Dino_061914_ACC,States,state types do not overlap,PASS,no second has two state labels
+Dino_061914_ACC,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 36, wake-interruption onsets 40 (authors' episode boundaries, +/-1 s)"
+Dino_061914_ACC,Physiology,median rates vs Watson 2016 (comparison only),WARN,E WAKE 0.76 Hz (paper 0.76); E nonREM 0.84 Hz (paper 0.69); E REM 0.89 Hz (paper 0.88); I WAKE 2.86 Hz (paper 5.59); I nonREM 1.13 Hz (paper 4.69); I REM 0.88 Hz (paper 4.25); I median <= E median in REM
+Dino_061914_ACC,Anatomy,every unit maps to one region via its shank,PASS,regions: ACC
+Dino_061914_ACC,Units,E/I labels consistent across authors' files,PASS,52 stable units = 46 E + 6 I; SSubtypes and MeanWaveforms agree
+Dino_061914_ACC,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+Dino_061914_ACC,Files,files match authors' file list,PASS,"all files present, sizes match"
+Dino_061914_ACC,Flags,authors' notes applied,PASS,Wake Activity: homecage (no timestamped exclusion in the notes)
+Dino_061914_ACC,Anatomy,region agrees with paper Table S1,PASS,"data: ACC; Table S1 (Dino): mPFC,ACC"
+Dino_061914_mPFC,Files,files match authors' file list,PASS,"all files present, sizes match"
 Dino_061914_mPFC,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
 Dino_061914_mPFC,Physiology,median rates vs Watson 2016 (comparison only),WARN,E WAKE 0.50 Hz (paper 0.76); E nonREM 0.58 Hz (paper 0.69); E REM 0.74 Hz (paper 0.88); I WAKE 18.64 Hz (paper 5.59); I nonREM 9.66 Hz (paper 4.69); I REM 24.24 Hz (paper 4.25)
-Dino_061914_mPFC,Files,files match authors' file list,PASS,"all files present, sizes match"
+Dino_061914_mPFC,Units,inhibitory units >= 3,PASS,5 inhibitory units
 Dino_061914_mPFC,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 10.5 min, nonREM 26.6 min, REM 4.9 min (20.3% of seconds scored by authors)"
-Dino_061914_mPFC,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 43, wake-interruption onsets 46 (authors' episode boundaries, +/-1 s)"
+Dino_061914_mPFC,Spikes,spike data covers the recording files,PASS,"last spike 17519.5 s, recording files end 17519.5 s"
 Dino_061914_mPFC,Anatomy,every unit maps to one region via its shank,PASS,regions: mPFC
 Dino_061914_mPFC,Spikes,longest stretch with no spikes from any unit,PASS,0.64 s starting at 6509.3 s
 Dino_061914_mPFC,States,state types do not overlap,PASS,no second has two state labels
-Dino_061914_mPFC,Flags,authors' notes applied,PASS,Wake Activity: homecage (no timestamped exclusion in the notes)
 Dino_061914_mPFC,Anatomy,region agrees with paper Table S1,PASS,"data: mPFC; Table S1 (Dino): mPFC,ACC"
-Rizzo_022715,Flags,authors' notes applied,PASS,no notes (no timestamped exclusion in the notes)
-Rizzo_022715,Files,files match authors' file list,PASS,"all files present, sizes match"
-Rizzo_022715,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+Dino_061914_mPFC,States,scored states lie within the spike recording,WARN,"MA 186 s, WI 554 s scored after the spike recording ends at 17520 s -> not used"
+Dino_061914_mPFC,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 60 units clean (recording end 17519.5 s)
+Dino_061914_mPFC,States,transitions and events,PASS,"WAKE->SLEEP 1, SLEEP->WAKE 0, microarousal onsets 43, wake-interruption onsets 46 (authors' episode boundaries, +/-1 s)"
+Dino_061914_mPFC,Flags,authors' notes applied,PASS,Wake Activity: homecage (no timestamped exclusion in the notes)
+Dino_061914_mPFC,Spikes,units with zero spikes in an analyzed state,PASS,none
+Dino_061914_mPFC,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 4: 0.05% ISIs <1 ms, 0.23% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+Dino_061914_mPFC,Units,E/I labels consistent across authors' files,PASS,60 stable units = 55 E + 5 I; SSubtypes and MeanWaveforms agree
 Rizzo_022715,Units,E/I labels consistent across authors' files,PASS,93 stable units = 89 E + 4 I; SSubtypes and MeanWaveforms agree
-Rizzo_022715,Anatomy,region agrees with paper Table S1,PASS,data: OFC; Table S1 (Rizzo): OFC
-Rizzo_022715,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.18 Hz (paper 0.76); E nonREM 0.94 Hz (paper 0.69); E REM 1.34 Hz (paper 0.88); I WAKE 7.91 Hz (paper 5.59); I nonREM 8.90 Hz (paper 4.69); I REM 11.22 Hz (paper 4.25)
-Rizzo_022715,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 35, wake-interruption onsets 34 (authors' episode boundaries, +/-1 s)"
-Rizzo_022715,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 81.5 min, nonREM 108.6 min, REM 28.6 min (56.7% of seconds scored by authors)"
-Rizzo_022715,Spikes,units with zero spikes in an analyzed state,PASS,none
-Rizzo_022715,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (25932 s)
-Rizzo_022715,States,state types do not overlap,WARN,"WAKE&nonREM 29 s, WAKE&WI 101 s -> marked AMBIGUOUS, excluded from modeling"
 Rizzo_022715,Spikes,longest stretch with no spikes from any unit,PASS,0.59 s starting at 18952.7 s
+Rizzo_022715,States,state types do not overlap,WARN,"WAKE&nonREM 29 s, WAKE&WI 101 s -> marked AMBIGUOUS, excluded from modeling"
+Rizzo_022715,Spikes,units with zero spikes in an analyzed state,PASS,none
+Rizzo_022715,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 81.5 min, nonREM 108.6 min, REM 28.6 min (56.7% of seconds scored by authors)"
+Rizzo_022715,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 35, wake-interruption onsets 34 (authors' episode boundaries, +/-1 s)"
+Rizzo_022715,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 1.18 Hz (paper 0.76); E nonREM 0.94 Hz (paper 0.69); E REM 1.34 Hz (paper 0.88); I WAKE 7.91 Hz (paper 5.59); I nonREM 8.90 Hz (paper 4.69); I REM 11.22 Hz (paper 4.25)
+Rizzo_022715,Anatomy,region agrees with paper Table S1,PASS,data: OFC; Table S1 (Rizzo): OFC
 Rizzo_022715,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 9: 0.10% ISIs <1 ms, 0.30% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
 Rizzo_022715,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 93 units clean (recording end 25932.1 s)
-Rizzo_022715,Spikes,spike data covers the recording files,PASS,"last spike 25932.1 s, recording files end 25932.1 s"
+Rizzo_022715,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
+Rizzo_022715,Files,files match authors' file list,PASS,"all files present, sizes match"
 Rizzo_022715,Units,inhibitory units >= 3,PASS,4 inhibitory units
+Rizzo_022715,Flags,authors' notes applied,PASS,no notes (no timestamped exclusion in the notes)
+Rizzo_022715,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (25932 s)
 Rizzo_022715,Anatomy,every unit maps to one region via its shank,PASS,regions: OFC
-Splinter_020915,Anatomy,every unit maps to one region via its shank,PASS,regions: OFC
-Splinter_020915,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.64 Hz (paper 0.76); E nonREM 0.47 Hz (paper 0.69); E REM 0.57 Hz (paper 0.88); I WAKE 5.48 Hz (paper 5.59); I nonREM 4.34 Hz (paper 4.69); I REM 3.26 Hz (paper 4.25)
-Splinter_020915,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 44, wake-interruption onsets 51 (authors' episode boundaries, +/-1 s)"
+Rizzo_022715,Spikes,spike data covers the recording files,PASS,"last spike 25932.1 s, recording files end 25932.1 s"
 Splinter_020915,States,usable WAKE and SLEEP time exists,PASS,"usable WAKE 64.2 min, nonREM 138.9 min, REM 17.7 min (64.5% of seconds scored by authors)"
-Splinter_020915,States,state types do not overlap,WARN,"WAKE&MA 11 s, WAKE&WI 75 s -> marked AMBIGUOUS, excluded from modeling"
+Splinter_020915,Spikes,units with zero spikes in an analyzed state,PASS,none
 Splinter_020915,States,scored states lie within the spike recording,PASS,all scored time is before the recording end (23487 s)
 Splinter_020915,States,"intervals well-formed (start < stop, non-negative)",PASS,all intervals well-formed
 Splinter_020915,Spikes,"sorted, non-negative, within recording, no duplicates",PASS,all 51 units clean (recording end 23487.5 s)
-Splinter_020915,Spikes,units with zero spikes in an analyzed state,PASS,none
-Splinter_020915,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 14: 0.06% ISIs <1 ms, 0.17% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+Splinter_020915,Flags,authors' notes applied,PASS,no notes (no timestamped exclusion in the notes)
+Splinter_020915,States,transitions and events,PASS,"WAKE->SLEEP 2, SLEEP->WAKE 0, microarousal onsets 44, wake-interruption onsets 51 (authors' episode boundaries, +/-1 s)"
 Splinter_020915,Spikes,spike data covers the recording files,PASS,"last spike 23487.5 s, recording files end 23487.5 s"
 Splinter_020915,Units,inhibitory units >= 3,PASS,9 inhibitory units
-Splinter_020915,Units,E/I labels consistent across authors' files,PASS,51 stable units = 42 E + 9 I; SSubtypes and MeanWaveforms agree
 Splinter_020915,Files,files match authors' file list,PASS,"all files present, sizes match"
 Splinter_020915,Anatomy,region agrees with paper Table S1,PASS,data: OFC; Table S1 (Splinter): OFC
 Splinter_020915,Spikes,longest stretch with no spikes from any unit,PASS,0.57 s starting at 4662.9 s
-Splinter_020915,Flags,authors' notes applied,PASS,no notes (no timestamped exclusion in the notes)
+Splinter_020915,Spikes,refractory period (authors' sorting criterion: >1 ms),PASS,"worst unit 14: 0.06% ISIs <1 ms, 0.17% <1.5 ms; units with >1% ISIs <1 ms: 0 (reported only; nothing excluded)"
+Splinter_020915,Physiology,median rates vs Watson 2016 (comparison only),PASS,E WAKE 0.64 Hz (paper 0.76); E nonREM 0.47 Hz (paper 0.69); E REM 0.57 Hz (paper 0.88); I WAKE 5.48 Hz (paper 5.59); I nonREM 4.34 Hz (paper 4.69); I REM 3.26 Hz (paper 4.25)
+Splinter_020915,States,state types do not overlap,WARN,"WAKE&MA 11 s, WAKE&WI 75 s -> marked AMBIGUOUS, excluded from modeling"
+Splinter_020915,Anatomy,every unit maps to one region via its shank,PASS,regions: OFC
+Splinter_020915,Units,E/I labels consistent across authors' files,PASS,51 stable units = 42 E + 9 I; SSubtypes and MeanWaveforms agree

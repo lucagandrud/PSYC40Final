@@ -128,12 +128,29 @@ def simultaneity(tab: pd.DataFrame) -> list[str]:
         rfi_same = np.allclose(np.asarray(ma["recording_file_intervals"], float),
                                np.asarray(mb["recording_file_intervals"], float), equal_nan=True) \
             if np.shape(ma["recording_file_intervals"]) == np.shape(mb["recording_file_intervals"]) else False
-        st_same = all(np.array_equal(sa[k], sb[k]) for k in ["WAKE", "nonREM", "REM", "MA", "WI"])
         dur_same = abs(ma["duration_s"] - mb["duration_s"]) < 1
-        ok = rfi_same and st_same and dur_same
+        # direct test: same clock => population activity co-fluctuates at ~zero lag
+        sp = {}
+        bw, T = 0.025, min(ma["duration_s"], mb["duration_s"])
+        for x in (s, m):
+            z = np.load(PROC / x / "spikes.npz")["spike_times"]
+            c = np.bincount((z[z < T] / bw).astype(int), minlength=int(T / bw))[:int(T / bw)].astype(float)
+            sp[x] = c - c.mean()
+        pa, pb = sp[s], sp[m]
+        den = np.sqrt(pa @ pa * (pb @ pb))
+        lags = np.arange(-40, 41)
+        cc = np.array([pa[max(0, l):len(pa) + min(0, l)] @ pb[max(0, -l):len(pb) - max(0, l)] / den for l in lags])
+        i = int(np.argmax(cc)); far = max(cc[0], cc[-1], cc[20], cc[60])
+        peak_ok = abs(lags[i] * bw) <= 0.05 and cc[i] > 3 * far
+        la = np.load(PROC / s / "labels_1s.npz")["labels"]; lb = np.load(PROC / m / "labels_1s.npz")["labels"]
+        n = min(len(la), len(lb)); both = (la[:n] > 0) & (lb[:n] > 0)
+        agree = 100 * float((la[:n][both] == lb[:n][both]).mean()) if both.any() else float("nan")
+        ok = rfi_same and dur_same and peak_ok
         out.append(f"<b>{s} + {m}</b>: {'CONFIRMED shared clock' if ok else 'NOT confirmed'} "
-                   f"(recording-file intervals identical: {rfi_same}; state scoring identical: {st_same}; "
-                   f"durations {ma['duration_s']:.0f} s vs {mb['duration_s']:.0f} s)")
+                   f"(recording-file intervals identical: {rfi_same}; last spike {ma['duration_s']:.2f} vs "
+                   f"{mb['duration_s']:.2f} s; population cross-correlation peak r={cc[i]:.3f} at "
+                   f"{lags[i]*bw*1000:+.0f} ms vs ≤{far:.3f} at ±0.5–1 s). The authors scored each probe "
+                   f"separately: labels agree on {agree:.1f}% of seconds scored in both.")
     return out
 
 
