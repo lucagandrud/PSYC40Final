@@ -44,6 +44,8 @@ def collect() -> pd.DataFrame:
     rows = []
     for mfile in RES.glob("*/*/metrics.json"):
         exp, rat = mfile.parts[-3], mfile.parts[-2]
+        if "_collapsed" in rat:                     # failed optimizations, kept for the record, not scored
+            continue
         m = json.loads(mfile.read_text())
         if not m.get("rat"):
             continue

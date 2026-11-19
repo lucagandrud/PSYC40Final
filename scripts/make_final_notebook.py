@@ -85,6 +85,8 @@ def ablation_lines():
 
 
 abl_table, abl_vals = ablation_lines()
+n_collapsed = len(list(RES.glob("*/*_collapsed_seed*")))
+n_abl_runs = sum(1 for e in ("decoder_short", "E_only", "I_only", "E_matched", "no_population") for _ in RES.glob(f"{e}/*/metrics.json") if "_collapsed" not in str(_))
 
 # ------------------------------------------------------------------ notebook text
 md("""
@@ -148,6 +150,8 @@ display(Image("../figures/architecture.png", width=1000))
 """)
 md("""
 **Training and testing.** Leave-one-rat-out: ten folds, each with one test rat, one validation rat (early stopping) and eight training rats; a rat's sessions always stay together. Each epoch draws the same number of labeled seconds from every training rat and every state, so no rat and no state dominates. The loss is cross-entropy against the authors' label of the second. Width (16 filters) and the number of pooling queries (2) are the smaller of the candidates I set out to compare; a check of wider settings on two folds is reported in `results/` where it finished.
+
+The network sits at chance for the first hundred or so steps before it starts learning. With the shorter ablation budget, a run occasionally never leaves that plateau on its validation rat; such a run is a failed optimization, not a result, so it was restarted with the next random seed ({n_collapsed} of {n_abl_runs + n_collapsed} ablation-budget runs; the failed runs are kept in `results/` under `_collapsed`). None of the ten main folds needed this.
 
 **Baseline.** Logistic regression on the same 2.26 s window, but with the raster collapsed to two traces first (spikes per E cell and per I cell in each bin). Bin position within the window is arbitrary, so this model can in practice only read overall E and I firing.
 """)

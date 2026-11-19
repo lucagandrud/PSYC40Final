@@ -12,7 +12,7 @@
 # ablations on the five one-per-region rats, all with the same shorter training budget (decoder_short = full model at that budget)
 --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test B22
 --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat19
---exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
+--exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20 --seed 1
 --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Dino
 --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
 --exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test B22
@@ -35,14 +35,3 @@
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Dino
 --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
-# if time allows
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test B22
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat19
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Dino
---exp no_relational --variant no_relational --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
---exp settings_C32_Q2 --filters 32 --queries 2 --test B22
---exp settings_C16_Q4 --filters 16 --queries 4 --test B22
---exp settings_C32_Q2 --filters 32 --queries 2 --test BWRat20
---exp settings_C16_Q4 --filters 16 --queries 4 --test BWRat20
---exp control_rawcounts --filters 16 --queries 2 --test B22 --input counts

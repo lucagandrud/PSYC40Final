@@ -1,3 +1,4 @@
 experiment,n_rats,bal_acc_mean,bal_acc_sd,kappa_mean,kappa_sd,bal_acc_2class_mean,bal_acc_2class_sd,kappa_2class_mean,nonrem_vs_activated_mean,nonrem_vs_activated_sd,recall_WAKE,recall_nonREM,recall_REM
 baseline,10,0.417,0.065,0.157,0.116,0.571,0.072,0.148,0.613,0.076,0.366,0.605,0.279
 decoder,10,0.518,0.073,0.389,0.168,0.656,0.142,0.284,0.802,0.1,0.468,0.838,0.248
+decoder_short,2,0.566,0.073,0.601,0.233,0.834,0.098,0.619,0.851,0.101,0.967,0.722,0.009
