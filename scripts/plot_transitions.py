@@ -15,9 +15,10 @@ from src.reference import TYPE_COLORS  # noqa: E402
 
 curves = json.loads((ROOT / "results" / "transitions" / "curves.json").read_text())
 kinds = ["MA onset", "WI onset", "WAKE->SLEEP", "SLEEP->WAKE"]
-titles = {"MA onset": "Microarousal onset", "WI onset": "Wake-interruption onset",
+titles = {"MA onset": "microarousal onset", "WI onset": "wake-interruption onset",
           "WAKE->SLEEP": "WAKE → SLEEP", "SLEEP->WAKE": "SLEEP → WAKE"}
 traces = [("E rate", TYPE_COLORS["E"]), ("I rate", TYPE_COLORS["I"]), ("synchrony", "#555555")]
+SHOW = {"E rate": "excitatory rate", "I rate": "inhibitory rate", "synchrony": "population synchrony"}
 t = np.arange(-60, 61)
 fig, axes = plt.subplots(3, 4, figsize=(13, 7.5), sharex=True)
 for j, kind in enumerate(kinds):
@@ -34,7 +35,7 @@ for j, kind in enumerate(kinds):
         if i == 0:
             ax.set_title(f"{titles[kind]}\n(n = {c['n_sessions']} sessions)", fontsize=11)
         if j == 0:
-            ax.set_ylabel(f"{name}\n% change from baseline", fontsize=10)
+            ax.set_ylabel(f"{SHOW[name]}\n% change from baseline", fontsize=10)
         if i == 2:
             ax.set_xlabel("time from boundary (s)")
 fig.suptitle("Firing around state boundaries (median and interquartile range across sessions; baseline = −60 to −30 s)", fontsize=12)

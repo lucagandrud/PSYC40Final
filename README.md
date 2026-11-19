@@ -10,7 +10,7 @@ Dartmouth PSYC 40 final project. I decode the authors' sleep-wake state (WAKE / 
 
 | folder | contents |
 |---|---|
-| `src/` | `load.py` and `preprocess.py` (the authors' data, as given, into 1 s labels and unit tables); `dataset.py` (10 ms raster bins, one example = one labeled second); `model.py` (the decoder); `train.py` (leave-one-rat-out training and testing); `baseline.py` (logistic regression on E/I rate traces); `ablate_dropping.py`; `transitions.py`; `brain3d.py` |
+| `src/` | `load.py` and `preprocess.py` (the authors' data, as given, into 1 s labels and unit tables); `dataset.py` (10 ms spike counts per unit, one example = one labeled second); `model.py` (the decoder); `train.py` (leave-one-rat-out training and testing); `baseline.py` (logistic regression on excitatory / inhibitory rate traces); `ablate_dropping.py`; `transitions.py`; `brain3d.py` |
 | `scripts/` | data download and QC pipeline; `run_jobs.py` (training scheduler); `summarize_results.py`; `plot_transitions.py`; `build_brain3d.py`; `make_final_notebook.py` |
 | `results/` | per-fold metrics and predictions for every experiment, `summary_*.csv`, transitions, 3D model |
 | `figures/` | all figures used in the notebook; `figures/qc/` has one QC panel per session |
@@ -36,9 +36,9 @@ then `chmod 600 ~/.crcns_credentials` and:
 
 ```bash
 bash scripts/run_unattended.sh                # downloads the sessions in scripts/download_queue.txt and runs QC on each
-python -m src.dataset                         # 10 ms raster bins per session
+python -m src.dataset                         # 10 ms spike-count bins per session
 python -m src.baseline                        # logistic-regression baseline, 10 folds
-python scripts/run_jobs.py results/jobs/queue_A.txt 4   # the CNN: main folds, ablations, setting checks
+python scripts/run_jobs.py results/jobs/queue_A.txt 4   # the CNN: main folds and ablations
 python -m src.ablate_dropping                 # neuron-dropping curve from the trained models
 python -m src.transitions && python scripts/plot_transitions.py
 python scripts/build_brain3d.py
@@ -49,7 +49,7 @@ Everything runs on a laptop CPU; one training fold takes about 40 minutes with 2
 
 ## Ground rules I followed
 
-- The authors' spike times, stable-unit set, E/I labels and state scoring are used unchanged. The only preprocessing that changes values is dividing each unit's spike counts by its own session mean (label-free), which the model needs to learn and to transfer across rats.
+- The authors' spike times, stable-unit set, excitatory / inhibitory labels and sleep-wake state scoring are used unchanged. The only preprocessing that changes values is dividing each unit's spike counts by its own session mean (label-free), which the model needs to learn and to transfer across rats.
 - Nothing is excluded on a criterion of my own; exclusions could only come from the authors' notes or a failed integrity check, and none were needed.
 - Unscored seconds are never used as targets and never filled in.
 - Train/test splits are by rat, never by second or session.

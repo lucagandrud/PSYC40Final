@@ -21,9 +21,9 @@ from src.dataset import CLASS_NAMES  # noqa: E402
 RES = ROOT / "results"; FIG = ROOT / "figures"; FIG.mkdir(exist_ok=True)
 REGION = {"B22": "mPFC", "BWRat17": "ACC", "BWRat18": "M2", "BWRat19": "M2", "BWRat20": "ACC",
           "BWRat21": "mPFC", "Bogey": "mPFC", "Dino": "mPFC+ACC", "Rizzo": "OFC", "Splinter": "OFC"}
-LABEL = {"decoder": "CNN (full)", "decoder_short": "CNN, all cells (same short budget as the ablations)", "baseline": "logistic regression on E/I traces",
-         "no_relational": "CNN without relational layer", "no_population": "CNN without population conv layers",
-         "E_only": "E cells only", "I_only": "I cells only", "E_matched": "E cells, as many as I cells",
+LABEL = {"decoder": "CNN on the spike trains", "decoder_short": "CNN, all cells (reference)", "baseline": "logistic regression on excitatory / inhibitory rates",
+         "no_relational": "CNN without the attention layer", "no_population": "CNN without the population convolutions",
+         "E_only": "excitatory cells only", "I_only": "inhibitory cells only", "E_matched": "excitatory cells, as many as inhibitory",
          "control_rawcounts": "CNN on raw counts (control)"}
 
 
@@ -110,7 +110,7 @@ def fig_ablations(df: pd.DataFrame):
     exps = [e for e in order if e in set(d.experiment)]
     if len(exps) < 2:
         return
-    fig, ax = plt.subplots(figsize=(8, 0.55 * len(exps) + 1.5))
+    fig, ax = plt.subplots(figsize=(9, 0.55 * len(exps) + 1.5))
     for i, e in enumerate(exps):
         v = d[d.experiment == e].balanced_accuracy.values
         color = {"E_only": TYPE_COLORS["E"], "E_matched": TYPE_COLORS["E"], "I_only": TYPE_COLORS["I"]}.get(e, "#2a78d6" if e == "decoder_short" else "#8a8a8a")
@@ -119,9 +119,9 @@ def fig_ablations(df: pd.DataFrame):
         ax.scatter(v, np.full(v.size, i), color="black", s=10, zorder=3)
         ax.text(0.02, i, f"n = {v.size} rats", va="center", fontsize=8, color="white")
     ax.set_yticks(range(len(exps))); ax.set_yticklabels([LABEL[e] for e in exps], fontsize=9); ax.invert_yaxis()
-    ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("3-class balanced accuracy on held-out rats (mean ± sd; dots = rats)")
+    ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("WAKE / nonREM / REM balanced accuracy on held-out rats (mean ± sd; dots = rats)")
     ax.spines[["top", "right"]].set_visible(False)
-    ax.set_title(f"Ablations, same training budget, {len(abl_rats)} held-out rats", fontsize=11, loc="left")
+    ax.set_title(f"Ablations: {len(abl_rats)} held-out rats, one per brain region", fontsize=11, loc="left")
     fig.tight_layout(); fig.savefig(FIG / "results_ablations.png", dpi=150)
 
 
