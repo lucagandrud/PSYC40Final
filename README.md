@@ -20,7 +20,15 @@ export CRCNS_USERNAME='your_username'
 export CRCNS_PASSWORD='your_password'
 ```
 
-then `chmod 600 ~/.crcns_credentials` and run `bash scripts/download_data.sh`. It downloads two sessions (`BWRat20_101013`, `20140526_277um`, about 5 GB total) into `data/raw/`.
+then `chmod 600 ~/.crcns_credentials` and run `bash scripts/run_unattended.sh`. It downloads the sessions listed in `data/manifests/download_queue.txt` (MD5-verified, raw LFP skipped), and every session that lands is automatically loaded, checked and added to the QC report. Progress: `bash scripts/status.sh`.
+
+## Pipeline so far
+
+- `src/load.py`: loads a session exactly as the authors provide it.
+- `src/preprocess.py`: unit table, 1 s state labels, exclusions from the authors' notes.
+- `scripts/process_session.py`: runs the quality checks for one session.
+- `scripts/build_qc_report.py`: builds `reports/qc_report.html`, a visual QC report covering every session.
+- `notebooks/01_data.ipynb`: data description, preprocessing and quality checks.
 
 ## References
 
