@@ -204,3 +204,17 @@ Recommend one option with reasons; the user decides.
 - **Time budget (5 h):** 0:00–0:45 Phase 1 on 2 sessions; 0:45–1:15 model discussion; 1:15–2:30 decoder + evaluation; 2:30–3:30 ablations + transitions; 3:30–4:15 3D model; 4:15–5:00 final rerun on all cleared sessions, notebook, push. If behind, cut the rate-only surrogate first, then transitions. Never cut the decoder, the controlled ablations, or the 3D model.
 - **BWRat17** (fear conditioning / shocks): QC and the authors' notes decide usability; report the verdict.
 - **Repo writing:** first person singular ("I"), never "we". Describe only the data actually used; don't mention sessions not downloaded or used.
+
+## Guiding principle: the authors' data and curation, as given
+- Use the authors' values and curation unchanged: their spike times, their stable-unit set (`SStable`, already filtered for instability with their cluster-quality measures), their E/I labels, and their state scoring.
+- Never exclude units or time on a metric I made up. Exclusions come only from the authors' own notes (injections, "unstable after X s") or from a failed integrity check (file won't load, counts don't match, times out of range), and every exclusion is listed.
+- Never state a guess as a fact. If something is an inference, label it as one or check it in the data first.
+- No synthetic data in the data pipeline. Unscored seconds are excluded, never filled in.
+
+## Paper definitions and notes (Watson 2016 supplementary methods)
+- **OFF periods:** 75–1250 ms of population silence. The authors' `OFFIntsTimePairFormat` contains intervals of 1–1211 ms, so it does not follow this definition; compute OFF periods from the spikes with the paper's definition instead.
+- **Population synchrony:** fraction of excitatory cells firing at least one spike in a 50 ms window, stepped every 25 ms.
+- **Limitations to state:** WAKE labels cover only arousals of 7 min or longer, which go with active behavior, so the decoder separates *active* wake from sleep. All recordings are from the lights-on period. Probes were advanced up to 300 µm per day, so sessions from the same rat mostly but not entirely record different neurons; this supports splitting train/test by rat.
+
+## Injection sessions (BWRat20_101513, BWRat21_121613, BWRat21_121813)
+For each: use `RecordingFileIntervals` to find the boundary between the recording files named in the authors' note (the injection time); check whether any spikes or state labels fall after it; compare with `GoodSleepInterval`; if post-injection data exists, exclude it automatically and add a QC flag. Report one line per session.
