@@ -71,34 +71,35 @@ def collect() -> pd.DataFrame:
 
 
 def fig_main(df: pd.DataFrame):
-    """Per-rat balanced accuracy: CNN vs baseline, plus pooled confusion matrix."""
+    """Per-rat balanced accuracy (two stacked panels) and a separate pooled confusion matrix."""
     d = df[df.experiment.isin(["decoder", "baseline"])]
     if d.empty:
         return
     rats = sorted(d.rat.unique())
-    fig, axes = plt.subplots(1, 3, figsize=(17, 4.4), gridspec_kw=dict(width_ratios=[2.2, 2.2, 1]))
+    fig, axes = plt.subplots(2, 1, figsize=(11, 7.2), sharex=True)
     w = 0.38; x = np.arange(len(rats))
     for ax, col, title, chance in ((axes[0], "balanced_accuracy", "WAKE / nonREM / REM", 1 / 3), (axes[1], "bal_acc_2class", "WAKE vs SLEEP", 0.5)):
         for i, (exp, color) in enumerate((("decoder", "#2a78d6"), ("baseline", "#b0b0b0"))):
             v = [d[(d.experiment == exp) & (d.rat == r)][col].mean() for r in rats]
             ax.bar(x + (i - 0.5) * w, v, w, color=color, label=LABEL[exp], edgecolor="white")
-        ax.axhline(chance, color="#888888", ls="--", lw=1); ax.text(len(rats) - 0.5, chance + 0.012, "chance", ha="right", fontsize=8, color="#666666")
-        ax.set_xticks(x); ax.set_xticklabels([f"{r}\n{REGION[r]}" for r in rats], fontsize=7.5)
-        ax.set_ylabel("balanced accuracy (held-out rat)"); ax.set_ylim(0, 1); ax.legend(frameon=False, fontsize=9, loc="lower left")
-        ax.spines[["top", "right"]].set_visible(False); ax.set_title(f"{title}: each rat decoded by a model trained on the others", fontsize=10.5)
-    axc = axes[2]
+        ax.axhline(chance, color="#888888", ls="--", lw=1); ax.text(len(rats) - 0.5, chance + 0.015, "chance", ha="right", fontsize=8, color="#666666")
+        ax.set_ylabel("balanced accuracy"); ax.set_ylim(0, 1); ax.legend(frameon=False, fontsize=9, loc="upper left", ncol=2)
+        ax.spines[["top", "right"]].set_visible(False); ax.set_title(f"{title}: each rat decoded by a model trained on the other rats", fontsize=11, loc="left")
+    axes[1].set_xticks(x); axes[1].set_xticklabels([f"{r}\n{REGION[r]}" for r in rats], fontsize=9)
+    fig.tight_layout(); fig.savefig(FIG / "results_decoder.png", dpi=150)
     dec = d[d.experiment == "decoder"]
     if dec.empty:
-        fig.tight_layout(); fig.savefig(FIG / "results_decoder.png", dpi=150); return
+        return
     cm = np.sum([np.array(json.loads(c)) for c in dec.confusion], axis=0)
     cmn = cm / cm.sum(1, keepdims=True)
+    fig, axc = plt.subplots(figsize=(4.2, 3.8))
     axc.imshow(cmn, cmap="Blues", vmin=0, vmax=1)
     for i in range(3):
         for j in range(3):
-            axc.text(j, i, f"{cmn[i, j]:.2f}", ha="center", va="center", color="white" if cmn[i, j] > 0.5 else "black", fontsize=10)
+            axc.text(j, i, f"{cmn[i, j]:.2f}", ha="center", va="center", color="white" if cmn[i, j] > 0.5 else "black", fontsize=11)
     axc.set_xticks(range(3)); axc.set_xticklabels(CLASS_NAMES); axc.set_yticks(range(3)); axc.set_yticklabels(CLASS_NAMES)
-    axc.set_xlabel("predicted"); axc.set_ylabel("authors' label"); axc.set_title("CNN confusion (all held-out rats)", fontsize=11)
-    fig.tight_layout(); fig.savefig(FIG / "results_decoder.png", dpi=150)
+    axc.set_xlabel("predicted"); axc.set_ylabel("authors' label"); axc.set_title("CNN confusion, all held-out rats\n(rows sum to 1)", fontsize=10.5)
+    fig.tight_layout(); fig.savefig(FIG / "results_confusion.png", dpi=150)
 
 
 def fig_ablations(df: pd.DataFrame):
@@ -120,7 +121,7 @@ def fig_ablations(df: pd.DataFrame):
     ax.set_yticks(range(len(exps))); ax.set_yticklabels([LABEL[e] for e in exps], fontsize=9); ax.invert_yaxis()
     ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("3-class balanced accuracy on held-out rats (mean ± sd; dots = rats)")
     ax.spines[["top", "right"]].set_visible(False)
-    ax.set_title(f"Ablations, same training budget, {len(abl_rats)} held-out rats ({', '.join(sorted(abl_rats))})", fontsize=10.5)
+    ax.set_title(f"Ablations, same training budget, {len(abl_rats)} held-out rats", fontsize=11, loc="left")
     fig.tight_layout(); fig.savefig(FIG / "results_ablations.png", dpi=150)
 
 

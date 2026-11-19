@@ -174,8 +174,8 @@ I chose this over a feature-based classifier because the aim was to work with th
 code("""
 display(Image("../figures/architecture.png", width=1000))
 """)
-md("""
-**Training and testing.** Leave-one-rat-out: ten folds, each with one test rat, one validation rat (early stopping) and eight training rats; a rat's sessions always stay together. Each epoch draws the same number of labeled seconds from every training rat and every state, so no rat and no state dominates. The loss is cross-entropy against the authors' label of the second. Width (16 filters) and the number of pooling queries (2) are the smaller of the candidates I set out to compare; a check of wider settings on two folds is reported in `results/` where it finished.
+md(f"""
+**Training and testing.** Leave-one-rat-out: ten folds, each with one test rat, one validation rat (early stopping) and eight training rats; a rat's sessions always stay together. Each epoch draws the same number of labeled seconds from every training rat and every state, so no rat and no state dominates. The loss is cross-entropy against the authors' label of the second. Width (16 filters) and the number of pooling queries (2) were fixed in advance at the smaller of the candidates I had planned to compare; there was no time left to tune them, so they are untuned choices.
 
 The network sits at chance for the first hundred or so steps before it starts learning. With the shorter ablation budget, a run occasionally never leaves that plateau on its validation rat; such a run is a failed optimization, not a result, so it was restarted with the next random seed ({n_collapsed} of {n_abl_runs + n_collapsed} ablation-budget runs; the failed runs are kept in `results/` under `_collapsed`). None of the ten main folds needed this.
 
@@ -201,7 +201,8 @@ md(f"""
 The CNN beats the baseline on the three-state score in {wins("balanced_accuracy")} rats. A third view of the same predictions, nonREM against the two activated states (WAKE and REM merged): CNN {act} ± {act_sd}, baseline {act_b} ± {act_b_sd}, better in {wins("bal_acc_nonrem_vs_activated")} rats. Per-state recall of the CNN, averaged over rats: WAKE {rec["WAKE"]}, nonREM {rec["nonREM"]}, REM {rec["REM"]}.
 """)
 code("""
-display(Image("../figures/results_decoder.png", width=1000))
+display(Image("../figures/results_decoder.png", width=900))
+display(Image("../figures/results_confusion.png", width=380))
 folds = pd.read_csv("../results/summary_folds.csv")
 d = folds[folds.experiment.isin(["decoder", "baseline"])]
 show = d.pivot(index=["rat", "region"], columns="experiment", values=["balanced_accuracy", "bal_acc_2class"]).round(2)
@@ -227,8 +228,6 @@ if os.path.exists("../figures/results_ablations.png"):
     display(Image("../figures/results_ablations.png", width=850))
 if os.path.exists("../figures/results_dropping.png"):
     display(Image("../figures/results_dropping.png", width=600))
-e = pd.read_csv("../results/summary_experiments.csv")
-display(e.round(3))
 """)
 
 md("""

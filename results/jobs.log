@@ -419,3 +419,6 @@ Splinter  test bal.acc 0.466 kappa 0.320 (val 0.439, 8 epochs, 2.5 min)
 2026-11-19 04:44:27 start pid 31568: --exp no_population --variant no_population --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
 fold test=BWRat20 val=BWRat21 variant=no_population C=16 Q=2
   epoch  8 loss 0.838 val loss 0.949 bal.acc 0.513 (125 s)
+  epoch  1 loss 1.072 val loss 1.051 bal.acc 0.428 (113 s)
+  epoch  0 loss 1.098 val loss 1.092 bal.acc 0.368 (124 s)
+  epoch  1 loss 1.074 val loss 1.020 bal.acc 0.573 (132 s)
