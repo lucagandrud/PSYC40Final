@@ -21,7 +21,7 @@ from src.dataset import CLASS_NAMES  # noqa: E402
 RES = ROOT / "results"; FIG = ROOT / "figures"; FIG.mkdir(exist_ok=True)
 REGION = {"B22": "mPFC", "BWRat17": "ACC", "BWRat18": "M2", "BWRat19": "M2", "BWRat20": "ACC",
           "BWRat21": "mPFC", "Bogey": "mPFC", "Dino": "mPFC+ACC", "Rizzo": "OFC", "Splinter": "OFC"}
-LABEL = {"decoder": "CNN (full)", "baseline": "logistic regression on E/I traces",
+LABEL = {"decoder": "CNN (full)", "decoder_short": "CNN, all cells (same short budget as the ablations)", "baseline": "logistic regression on E/I traces",
          "no_relational": "CNN without relational layer", "no_population": "CNN without population conv layers",
          "E_only": "E cells only", "I_only": "I cells only", "E_matched": "E cells, as many as I cells",
          "control_rawcounts": "CNN on raw counts (control)"}
@@ -33,7 +33,11 @@ def two_class(cm) -> dict:
     c = np.array([[cm[0, 0], cm[0, 1:].sum()], [cm[1:, 0].sum(), cm[1:, 1:].sum()]])
     tpr = np.array([c[0, 0] / c[0].sum() if c[0].sum() else np.nan, c[1, 1] / c[1].sum() if c[1].sum() else np.nan])
     n = c.sum(); po = np.trace(c) / n; pe = (c.sum(1) * c.sum(0)).sum() / n ** 2
-    return dict(bal_acc_2class=float(np.nanmean(tpr)), kappa_2class=float((po - pe) / (1 - pe)) if pe < 1 else np.nan)
+    # nonREM vs the two activated states (WAKE + REM merged)
+    a = np.array([[cm[1, 1], cm[1, 0] + cm[1, 2]], [cm[0, 1] + cm[2, 1], cm[0, 0] + cm[0, 2] + cm[2, 0] + cm[2, 2]]])
+    tpr_a = np.array([a[0, 0] / a[0].sum() if a[0].sum() else np.nan, a[1, 1] / a[1].sum() if a[1].sum() else np.nan])
+    return dict(bal_acc_2class=float(np.nanmean(tpr)), kappa_2class=float((po - pe) / (1 - pe)) if pe < 1 else np.nan,
+                bal_acc_nonrem_vs_activated=float(np.nanmean(tpr_a)))
 
 
 def collect() -> pd.DataFrame:
@@ -56,6 +60,8 @@ def collect() -> pd.DataFrame:
                                      bal_acc_sd=("balanced_accuracy", "std"), kappa_mean=("kappa", "mean"),
                                      kappa_sd=("kappa", "std"), bal_acc_2class_mean=("bal_acc_2class", "mean"),
                                      bal_acc_2class_sd=("bal_acc_2class", "std"), kappa_2class_mean=("kappa_2class", "mean"),
+                                     nonrem_vs_activated_mean=("bal_acc_nonrem_vs_activated", "mean"),
+                                     nonrem_vs_activated_sd=("bal_acc_nonrem_vs_activated", "std"),
                                      recall_WAKE=("recall_WAKE", "mean"), recall_nonREM=("recall_nonREM", "mean"),
                                      recall_REM=("recall_REM", "mean")).round(3)
     g.to_csv(RES / "summary_experiments.csv")
@@ -68,14 +74,14 @@ def fig_main(df: pd.DataFrame):
     if d.empty:
         return
     rats = sorted(d.rat.unique())
-    fig, axes = plt.subplots(1, 3, figsize=(15, 4.2), gridspec_kw=dict(width_ratios=[2, 2, 1]))
+    fig, axes = plt.subplots(1, 3, figsize=(17, 4.4), gridspec_kw=dict(width_ratios=[2.2, 2.2, 1]))
     w = 0.38; x = np.arange(len(rats))
     for ax, col, title, chance in ((axes[0], "balanced_accuracy", "WAKE / nonREM / REM", 1 / 3), (axes[1], "bal_acc_2class", "WAKE vs SLEEP", 0.5)):
         for i, (exp, color) in enumerate((("decoder", "#2a78d6"), ("baseline", "#b0b0b0"))):
             v = [d[(d.experiment == exp) & (d.rat == r)][col].mean() for r in rats]
             ax.bar(x + (i - 0.5) * w, v, w, color=color, label=LABEL[exp], edgecolor="white")
         ax.axhline(chance, color="#888888", ls="--", lw=1); ax.text(len(rats) - 0.5, chance + 0.012, "chance", ha="right", fontsize=8, color="#666666")
-        ax.set_xticks(x); ax.set_xticklabels([f"{r}\n{REGION[r]}" for r in rats], fontsize=8)
+        ax.set_xticks(x); ax.set_xticklabels([f"{r}\n{REGION[r]}" for r in rats], fontsize=7.5)
         ax.set_ylabel("balanced accuracy (held-out rat)"); ax.set_ylim(0, 1); ax.legend(frameon=False, fontsize=9, loc="lower left")
         ax.spines[["top", "right"]].set_visible(False); ax.set_title(f"{title}: each rat decoded by a model trained on the others", fontsize=10.5)
     axc = axes[2]
@@ -94,22 +100,25 @@ def fig_main(df: pd.DataFrame):
 
 
 def fig_ablations(df: pd.DataFrame):
-    order = ["decoder", "no_relational", "no_population", "E_only", "E_matched", "I_only", "baseline", "control_rawcounts"]
-    d = df[df.experiment.isin(order)]
+    """All rows restricted to the rats that have ablation results, so every bar is over the same rats."""
+    order = ["decoder_short", "no_population", "no_relational", "E_only", "E_matched", "I_only", "baseline", "control_rawcounts"]
+    abl_rats = set(df[df.experiment == "decoder_short"].rat)
+    d = df[df.experiment.isin(order) & df.rat.isin(abl_rats)]
     exps = [e for e in order if e in set(d.experiment)]
     if len(exps) < 2:
         return
     fig, ax = plt.subplots(figsize=(8, 0.55 * len(exps) + 1.5))
     for i, e in enumerate(exps):
         v = d[d.experiment == e].balanced_accuracy.values
-        color = {"E_only": TYPE_COLORS["E"], "E_matched": TYPE_COLORS["E"], "I_only": TYPE_COLORS["I"]}.get(e, "#2a78d6" if e == "decoder" else "#8a8a8a")
+        color = {"E_only": TYPE_COLORS["E"], "E_matched": TYPE_COLORS["E"], "I_only": TYPE_COLORS["I"]}.get(e, "#2a78d6" if e == "decoder_short" else "#8a8a8a")
         ax.barh(i, v.mean(), color=color, alpha=0.85, height=0.6)
         ax.errorbar(v.mean(), i, xerr=v.std(), color="black", capsize=3, lw=1)
         ax.scatter(v, np.full(v.size, i), color="black", s=10, zorder=3)
         ax.text(0.02, i, f"n = {v.size} rats", va="center", fontsize=8, color="white")
     ax.set_yticks(range(len(exps))); ax.set_yticklabels([LABEL[e] for e in exps], fontsize=9); ax.invert_yaxis()
-    ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("balanced accuracy on held-out rats (mean ± sd; dots = rats)")
-    ax.spines[["top", "right"]].set_visible(False); ax.set_title("Ablations: what carries the state information?", fontsize=11)
+    ax.axvline(1 / 3, color="#888888", ls="--", lw=1); ax.set_xlim(0, 1); ax.set_xlabel("3-class balanced accuracy on held-out rats (mean ± sd; dots = rats)")
+    ax.spines[["top", "right"]].set_visible(False)
+    ax.set_title(f"Ablations on {len(abl_rats)} held-out rats ({', '.join(sorted(abl_rats))}): what carries the state information?", fontsize=10.5)
     fig.tight_layout(); fig.savefig(FIG / "results_ablations.png", dpi=150)
 
 

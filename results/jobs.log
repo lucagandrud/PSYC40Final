@@ -39,3 +39,38 @@ BWRat19   test bal.acc 0.609 kappa 0.748 (val 0.619, 7 epochs, 28.1 min)
 2026-11-19 02:00:29 start pid 51960: --exp decoder --filters 16 --queries 2 --test Splinter --predict-all
 fold test=Splinter val=B22 variant=full C=16 Q=2
   epoch  7 loss 0.869 val loss 0.833 bal.acc 0.541 (165 s)
+  epoch  7 loss 0.837 val loss 0.796 bal.acc 0.533 (169 s)
+  epoch  0 loss 1.076 val loss 1.054 bal.acc 0.434 (202 s)
+  epoch  8 loss 0.827 val loss 0.987 bal.acc 0.507 (180 s)
+BWRat20   test bal.acc 0.611 kappa 0.539 (val 0.415, 7 epochs, 34.0 min)
+2026-11-19 02:06:30 start pid 54805: --exp decoder --filters 16 --queries 2 --test BWRat17 --predict-all
+fold test=BWRat17 val=BWRat18 variant=full C=16 Q=2
+  epoch  1 loss 0.944 val loss 0.938 bal.acc 0.500 (189 s)
+B22       test bal.acc 0.478 kappa 0.355 (val 0.563, 8 epochs, 35.9 min)
+2026-11-19 02:08:30 start pid 55795: --exp decoder --filters 16 --queries 2 --test BWRat18 --predict-all
+fold test=BWRat18 val=BWRat19 variant=full C=16 Q=2
+  epoch  0 loss 1.098 val loss 1.064 bal.acc 0.485 (180 s)
+  epoch  2 loss 0.884 val loss 0.967 bal.acc 0.518 (213 s)
+  epoch  0 loss 1.105 val loss 0.993 bal.acc 0.640 (214 s)
+  epoch  1 loss 0.959 val loss 1.265 bal.acc 0.337 (203 s)
+  epoch  3 loss 0.852 val loss 0.877 bal.acc 0.547 (211 s)
+  epoch  1 loss 1.044 val loss 0.853 bal.acc 0.595 (191 s)
+  epoch  2 loss 0.917 val loss 1.057 bal.acc 0.441 (177 s)
+  epoch  4 loss 0.836 val loss 0.987 bal.acc 0.511 (190 s)
+  epoch  2 loss 0.956 val loss 0.975 bal.acc 0.531 (176 s)
+  epoch  3 loss 0.877 val loss 1.158 bal.acc 0.423 (175 s)
+  epoch  5 loss 0.833 val loss 0.840 bal.acc 0.537 (198 s)
+  epoch  3 loss 0.896 val loss 0.676 bal.acc 0.626 (193 s)
+  epoch  4 loss 0.840 val loss 1.160 bal.acc 0.445 (186 s)
+Dino      test bal.acc 0.574 kappa 0.280 (val 0.582, 9 epochs, 50.4 min)
+2026-11-19 02:22:32 start pid 62509: --exp decoder --filters 16 --queries 2 --test BWRat21 --predict-all
+fold test=BWRat21 val=Bogey variant=full C=16 Q=2
+  epoch  6 loss 0.823 val loss 0.919 bal.acc 0.515 (213 s)
+  epoch  4 loss 0.883 val loss 0.766 bal.acc 0.610 (206 s)
+  epoch  5 loss 0.861 val loss 1.141 bal.acc 0.420 (200 s)
+  epoch  0 loss 1.076 val loss 0.840 bal.acc 0.587 (222 s)
+BWRat17   test bal.acc 0.500 kappa 0.344 (val 0.441, 6 epochs, 21.1 min)
+  epoch  7 loss 0.812 val loss 0.960 bal.acc 0.603 (227 s)
+2026-11-19 02:28:03 start pid 65306: --exp decoder --filters 16 --queries 2 --test Bogey --predict-all
+fold test=Bogey val=Dino variant=full C=16 Q=2
+  epoch  5 loss 0.878 val loss 0.630 bal.acc 0.627 (211 s)

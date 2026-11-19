@@ -1,0 +1,175 @@
+{
+ "test_rat": "BWRat17",
+ "val_rat": "BWRat18",
+ "train_rats": [
+  "B22",
+  "BWRat19",
+  "BWRat20",
+  "BWRat21",
+  "Bogey",
+  "Dino",
+  "Rizzo",
+  "Splinter"
+ ],
+ "variant": "full",
+ "filters": 16,
+ "queries": 2,
+ "seed": 0,
+ "input": "relative",
+ "norm": false,
+ "lr": 0.001,
+ "n_params": 6275,
+ "best_val_bal_acc": 0.4406666666666666,
+ "epochs": 6,
+ "max_epochs": 12,
+ "min_epochs": 6,
+ "patience": 3,
+ "epoch_size": 256,
+ "best_val_loss": 1.0572099685668945,
+ "train_minutes": 21.055980853239696,
+ "history": [
+  {
+   "epoch": 0,
+   "train_loss": 1.0979725954667576,
+   "val_loss": 1.0641841888427734,
+   "val_bal_acc": 0.48466666666666663,
+   "seconds": 180.08758687973022
+  },
+  {
+   "epoch": 1,
+   "train_loss": 0.9594843255785795,
+   "val_loss": 1.2645072937011719,
+   "val_bal_acc": 0.33666666666666667,
+   "seconds": 203.4259672164917
+  },
+  {
+   "epoch": 2,
+   "train_loss": 0.9166364692506336,
+   "val_loss": 1.0572099685668945,
+   "val_bal_acc": 0.4406666666666666,
+   "seconds": 177.47578287124634
+  },
+  {
+   "epoch": 3,
+   "train_loss": 0.8770981782958621,
+   "val_loss": 1.1575124263763428,
+   "val_bal_acc": 0.42333333333333334,
+   "seconds": 174.65590071678162
+  },
+  {
+   "epoch": 4,
+   "train_loss": 0.8399907693548022,
+   "val_loss": 1.1602306365966797,
+   "val_bal_acc": 0.4446666666666667,
+   "seconds": 185.60706496238708
+  },
+  {
+   "epoch": 5,
+   "train_loss": 0.8609011763563523,
+   "val_loss": 1.1409441232681274,
+   "val_bal_acc": 0.42,
+   "seconds": 199.91064715385437
+  }
+ ],
+ "rat": {
+  "n": 7405,
+  "balanced_accuracy": 0.5003239036960118,
+  "kappa": 0.34388909254902866,
+  "accuracy": 0.6048615800135044,
+  "recall": {
+   "WAKE": 0.29556786703601107,
+   "nonREM": 0.9621606008087811,
+   "REM": 0.24324324324324326
+  },
+  "classes_present": [
+   "WAKE",
+   "nonREM",
+   "REM"
+  ],
+  "confusion": [
+   [
+    1067,
+    1349,
+    1194
+   ],
+   [
+    123,
+    3331,
+    8
+   ],
+   [
+    87,
+    165,
+    81
+   ]
+  ]
+ },
+ "sessions": {
+  "BWRat17_121712": {
+   "n": 3481,
+   "balanced_accuracy": 0.5863992104337393,
+   "kappa": 0.3064059556141341,
+   "accuracy": 0.5196782533754668,
+   "recall": {
+    "WAKE": 0.3483099752679307,
+    "nonREM": 0.9642857142857143,
+    "REM": 0.44660194174757284
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     845,
+     526,
+     1055
+    ],
+    [
+     30,
+     918,
+     4
+    ],
+    [
+     41,
+     16,
+     46
+    ]
+   ]
+  },
+  "BWRat17_121912": {
+   "n": 3924,
+   "balanced_accuracy": 0.4336761649055951,
+   "kappa": 0.23509271323671366,
+   "accuracy": 0.6804281345565749,
+   "recall": {
+    "WAKE": 0.1875,
+    "nonREM": 0.9613545816733068,
+    "REM": 0.15217391304347827
+   },
+   "classes_present": [
+    "WAKE",
+    "nonREM",
+    "REM"
+   ],
+   "confusion": [
+    [
+     222,
+     823,
+     139
+    ],
+    [
+     93,
+     2413,
+     4
+    ],
+    [
+     46,
+     149,
+     35
+    ]
+   ]
+  }
+ }
+}

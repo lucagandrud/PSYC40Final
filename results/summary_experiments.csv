@@ -1,3 +1,3 @@
-experiment,n_rats,bal_acc_mean,bal_acc_sd,kappa_mean,kappa_sd,bal_acc_2class_mean,bal_acc_2class_sd,kappa_2class_mean,recall_WAKE,recall_nonREM,recall_REM
-baseline,10,0.417,0.065,0.157,0.116,0.571,0.072,0.148,0.366,0.605,0.279
-decoder,1,0.609,,0.748,,0.882,,0.739,0.986,0.841,0.0
+experiment,n_rats,bal_acc_mean,bal_acc_sd,kappa_mean,kappa_sd,bal_acc_2class_mean,bal_acc_2class_sd,kappa_2class_mean,nonrem_vs_activated_mean,nonrem_vs_activated_sd,recall_WAKE,recall_nonREM,recall_REM
+baseline,10,0.417,0.065,0.157,0.116,0.571,0.072,0.148,0.613,0.076,0.366,0.605,0.279
+decoder,5,0.555,0.062,0.453,0.191,0.714,0.154,0.369,0.844,0.086,0.632,0.777,0.255

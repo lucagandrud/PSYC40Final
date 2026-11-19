@@ -94,15 +94,17 @@ def main():
         ax.view_init(elev=22, azim=-60 + 0.25 * i)
         ax.set_xlabel("AP (µm)"); ax.set_ylabel("RL (µm)"); ax.set_zlabel("depth (µm)")
         ax.set_title(f"Dino_061914: mPFC (blue-grey volume) + ACC (tan volume) units, t = {t - T0:5.1f} s", fontsize=12, pad=0)
-        axs = fig2.add_axes([0.08, 0.075, 0.84, 0.1]); axs.set_xlim(T0, T1); axs.set_ylim(0, 2); axs.set_yticks([0.5, 1.5])
-        axs.set_yticklabels(["decoder", "authors"]); axs.set_xlabel("session time (s)"); axs.spines[["top", "right"]].set_visible(False)
+        axs = fig2.add_axes([0.1, 0.075, 0.82, 0.12]); axs.set_xlim(T0, T1); axs.set_ylim(0, 3); axs.set_yticks([0.5, 1.5, 2.5])
+        axs.set_yticklabels(["decoder, ACC", "decoder, mPFC", "authors"], fontsize=8); axs.set_xlabel("session time (s)"); axs.spines[["top", "right"]].set_visible(False)
+        rows = {"authors": 2, "Dino_061914_mPFC": 1, "Dino_061914_ACC": 0}
+        tr = strip["Dino_061914_mPFC"]["true"]                              # the authors scored both probes alike here
+        for j, sec in enumerate(secs):
+            axs.add_patch(Rectangle((sec, 2.05), 1, 0.9, color=STATE_HEX.get(int(tr[j]), "#dddddd"), lw=0))
         for s in PAIR:
-            tr = strip[s]["true"]; pr = strip[s].get("pred")
-            for j, sec in enumerate(secs):
-                axs.add_patch(Rectangle((sec, 1.05), 1, 0.9, color=STATE_HEX.get(int(tr[j]), "#dddddd"), lw=0))
-                if pr is not None:
-                    axs.add_patch(Rectangle((sec, 0.05), 1, 0.9, color=STATE_HEX.get(int(pr[j]), "#dddddd"), lw=0))
-            break                                                        # same labels for both probes within this window
+            pr = strip[s].get("pred")
+            if pr is not None:
+                for j, sec in enumerate(secs):
+                    axs.add_patch(Rectangle((sec, rows[s] + 0.05), 1, 0.9, color=STATE_HEX.get(int(pr[j]), "#dddddd"), lw=0))
         axs.axvline(t, color="black", lw=1.5)
         for k, (name, hexc) in enumerate((("WAKE", STATE_HEX[1]), ("nonREM", STATE_HEX[2]), ("REM", STATE_HEX[3]))):
             fig2.text(0.08 + 0.1 * k, 0.005, f"■ {name}", color=hexc, fontsize=9)
