@@ -86,6 +86,12 @@ def ablation_lines():
 
 abl_table, abl_vals = ablation_lines()
 n_collapsed = len(list(RES.glob("*/*_collapsed_seed*")))
+try:
+    _d = pd.read_csv(RES / "dropping" / "summary.csv"); _g = _d.groupby("k").balanced_accuracy.mean()
+    drop_txt = (f"The neuron-dropping curve says the readout needs tens of cells: given random subsets of the test rat's neurons, "
+                f"the trained decoder is at chance with 1–2 cells, {_g['5']:.2f} with 5, {_g['10']:.2f} with 10, {_g['20']:.2f} with 20 and {_g['all']:.2f} with all of them.")
+except Exception:
+    drop_txt = ""
 n_abl_runs = sum(1 for e in ("decoder_short", "E_only", "I_only", "E_matched", "no_population") for _ in RES.glob(f"{e}/*/metrics.json") if "_collapsed" not in str(_))
 
 # ------------------------------------------------------------------ notebook text
@@ -233,7 +239,7 @@ display(Image("../figures/brain3d_still.png", width=800))
 md(f"""
 ## 6. Interpretation, limitations and improvements
 
-**What the results show.** Read from the raster, a network trained on eight rats (a ninth used only to decide when to stop) scores a tenth at {dec} balanced accuracy over the three states (chance 0.33), against {base} for a model that can only read E and I rates, and it wins in {wins("balanced_accuracy")} rats. What transfers across animals is mainly the difference between nonREM and the two activated states: {act} balanced accuracy for nonREM vs WAKE+REM, in every rat above the baseline's {act_b}. nonREM recall is at least 0.73 in nine of ten rats. Telling WAKE from REM with cortical spikes alone is the weak point, and it fails in a rat-specific way: in four rats WAKE recall is 0.76 or higher; in three (Dino, Bogey, BWRat18) it is 0.06 or lower because their waking seconds are called REM; in BWRat17, BWRat21 and Splinter it is 0.24–0.46, with most waking seconds called nonREM. This is the pattern the physiology predicts. nonREM has a signature that is visible in spikes, the alternation of population silence (OFF periods) and activity, while WAKE and REM are both activated cortex with similar firing; the authors themselves separated them with the EMG proxy, which the decoder never sees. The ablation table above says what the network relies on, and the neuron-dropping curve how many cells its readout needs. Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, though the transition data are too few and too coarse to say more.
+**What the results show.** Read from the raster, a network trained on eight rats (a ninth used only to decide when to stop) scores a tenth at {dec} balanced accuracy over the three states (chance 0.33), against {base} for a model that can only read E and I rates, and it wins in {wins("balanced_accuracy")} rats. What transfers across animals is mainly the difference between nonREM and the two activated states: {act} balanced accuracy for nonREM vs WAKE+REM, in every rat above the baseline's {act_b}. nonREM recall is at least 0.73 in nine of ten rats. Telling WAKE from REM with cortical spikes alone is the weak point, and it fails in a rat-specific way: in four rats WAKE recall is 0.76 or higher; in three (Dino, Bogey, BWRat18) it is 0.06 or lower because their waking seconds are called REM; in BWRat17, BWRat21 and Splinter it is 0.24–0.46, with most waking seconds called nonREM. This is the pattern the physiology predicts. nonREM has a signature that is visible in spikes, the alternation of population silence (OFF periods) and activity, while WAKE and REM are both activated cortex with similar firing; the authors themselves separated them with the EMG proxy, which the decoder never sees. The ablation table above says what the network relies on. {drop_txt} Around the authors' boundaries, firing changes are small at 1 s resolution and no cell type reliably leads the scored boundary, which fits a cortex that follows the subcortical switch rather than driving it, though the transition data are too few and too coarse to say more.
 
 **Limitations.**
 1. *Labels and inputs share signal.* The authors scored states from LFP and an LFP-derived EMG proxy recorded on the same probes as the spikes, so part of what the decoder recovers is the scoring itself.

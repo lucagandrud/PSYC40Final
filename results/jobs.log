@@ -216,3 +216,83 @@ fold test=Splinter val=B22 variant=full C=16 Q=2
 fold test=BWRat19 val=BWRat20 variant=E_only C=16 Q=2
 2026-11-19 03:51:46 scheduler on results/jobs/queue_A.txt with 4 slots
 2026-11-19 03:51:46 collapsed at chance (seed 0): relaunching with seed 1: --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20 --seed 1
+  epoch  5 loss 0.927 val loss 0.863 bal.acc 0.534 (153 s)
+  epoch  0 loss 1.110 val loss 1.035 bal.acc 0.418 (154 s)
+  epoch  0 loss 1.109 val loss 1.103 bal.acc 0.334 (174 s)
+  epoch  0 loss 1.107 val loss 1.079 bal.acc 0.333 (191 s)
+  epoch  6 loss 0.921 val loss 0.948 bal.acc 0.483 (190 s)
+  epoch  1 loss 1.038 val loss 0.765 bal.acc 0.598 (162 s)
+  epoch  1 loss 1.090 val loss 1.008 bal.acc 0.543 (184 s)
+  epoch  1 loss 1.099 val loss 1.070 bal.acc 0.441 (191 s)
+  epoch  7 loss 0.922 val loss 0.882 bal.acc 0.534 (190 s)
+  epoch  2 loss 0.938 val loss 0.686 bal.acc 0.601 (158 s)
+  epoch  2 loss 0.979 val loss 0.887 bal.acc 0.551 (179 s)
+  epoch  2 loss 1.047 val loss 0.996 bal.acc 0.464 (188 s)
+  epoch  3 loss 0.927 val loss 0.738 bal.acc 0.554 (150 s)
+  epoch  8 loss 0.871 val loss 0.890 bal.acc 0.525 (182 s)
+  epoch  3 loss 0.944 val loss 0.782 bal.acc 0.600 (181 s)
+  epoch  3 loss 0.956 val loss 1.122 bal.acc 0.436 (191 s)
+  epoch  4 loss 0.887 val loss 0.691 bal.acc 0.599 (158 s)
+  epoch  4 loss 0.939 val loss 0.828 bal.acc 0.582 (177 s)
+  epoch  5 loss 0.874 val loss 0.698 bal.acc 0.608 (145 s)
+  epoch  4 loss 0.920 val loss 0.948 bal.acc 0.493 (191 s)
+  epoch  5 loss 0.909 val loss 0.785 bal.acc 0.599 (180 s)
+B22       test bal.acc 0.438 kappa 0.244 (val 0.601, 6 epochs, 18.1 min)
+2026-11-19 04:09:50 start pid 14889: --exp decoder_short --variant full --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20 --seed 1
+fold test=BWRat20 val=BWRat21 variant=full C=16 Q=2
+  epoch  5 loss 0.896 val loss 1.098 bal.acc 0.477 (162 s)
+Dino      test bal.acc 0.563 kappa 0.512 (val 0.534, 9 epochs, 35.5 min)
+2026-11-19 04:11:21 start pid 15655: --exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat20
+fold test=BWRat20 val=BWRat21 variant=E_only C=16 Q=2
+  epoch  6 loss 0.900 val loss 0.783 bal.acc 0.636 (152 s)
+  epoch  0 loss 1.105 val loss 1.097 bal.acc 0.441 (151 s)
+  epoch  6 loss 0.884 val loss 0.979 bal.acc 0.546 (170 s)
+/Users/lucagandrud/projects/PSYC40Final/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+BWRat19   test bal.acc 0.597 kappa 0.284 (val 0.600, 7 epochs, 21.6 min)
+2026-11-19 04:13:21 start pid 16640: --exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Dino
+fold test=Dino val=Rizzo variant=E_only C=16 Q=2
+  epoch  0 loss 1.107 val loss 1.094 bal.acc 0.483 (121 s)
+  epoch  1 loss 1.097 val loss 1.090 bal.acc 0.334 (141 s)
+  epoch  7 loss 0.880 val loss 0.927 bal.acc 0.523 (171 s)
+  epoch  1 loss 1.017 val loss 0.879 bal.acc 0.487 (142 s)
+  epoch  0 loss 1.105 val loss 1.092 bal.acc 0.351 (154 s)
+  epoch  2 loss 1.087 val loss 1.067 bal.acc 0.460 (155 s)
+  epoch  2 loss 0.940 val loss 0.872 bal.acc 0.529 (140 s)
+  epoch  1 loss 1.029 val loss 0.955 bal.acc 0.515 (151 s)
+  epoch  8 loss 0.860 val loss 1.129 bal.acc 0.584 (181 s)
+  epoch  3 loss 1.046 val loss 1.063 bal.acc 0.477 (159 s)
+  epoch  3 loss 0.902 val loss 0.851 bal.acc 0.502 (147 s)
+  epoch  2 loss 0.926 val loss 1.062 bal.acc 0.410 (168 s)
+  epoch  9 loss 0.860 val loss 0.928 bal.acc 0.526 (194 s)
+  epoch  4 loss 1.005 val loss 1.204 bal.acc 0.490 (163 s)
+  epoch  4 loss 0.904 val loss 0.864 bal.acc 0.534 (145 s)
+  epoch  3 loss 0.878 val loss 0.915 bal.acc 0.499 (150 s)
+  epoch  5 loss 0.962 val loss 1.559 bal.acc 0.444 (138 s)
+  epoch  5 loss 0.883 val loss 0.813 bal.acc 0.524 (124 s)
+  epoch  4 loss 0.862 val loss 0.953 bal.acc 0.498 (129 s)
+Splinter  test bal.acc 0.514 kappa 0.253 (val 0.523, 10 epochs, 35.7 min)
+  epoch  6 loss 0.876 val loss 0.817 bal.acc 0.525 (124 s)
+  epoch  6 loss 0.923 val loss 1.315 bal.acc 0.468 (136 s)
+2026-11-19 04:27:24 start pid 23277: --exp E_only --variant E_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test Splinter
+fold test=Splinter val=B22 variant=E_only C=16 Q=2
+  epoch  5 loss 0.864 val loss 0.963 bal.acc 0.516 (137 s)
+  epoch  7 loss 0.885 val loss 0.964 bal.acc 0.422 (142 s)
+  epoch  0 loss 1.108 val loss 1.078 bal.acc 0.333 (177 s)
+  epoch  6 loss 0.855 val loss 1.044 bal.acc 0.457 (149 s)
+BWRat20   test bal.acc 0.494 kappa 0.230 (val 0.477, 7 epochs, 21.1 min)
+2026-11-19 04:31:25 start pid 25107: --exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test B22
+fold test=B22 val=BWRat17 variant=I_only C=16 Q=2
+  epoch  8 loss 0.886 val loss 0.840 bal.acc 0.519 (130 s)
+  epoch  0 loss 1.106 val loss 1.024 bal.acc 0.460 (19 s)
+  epoch  1 loss 1.024 val loss 0.848 bal.acc 0.533 (16 s)
+  epoch  2 loss 0.929 val loss 0.775 bal.acc 0.535 (18 s)
+  epoch  3 loss 0.914 val loss 0.807 bal.acc 0.568 (18 s)
+  epoch  4 loss 0.885 val loss 0.820 bal.acc 0.575 (16 s)
+  epoch  1 loss 1.049 val loss 0.993 bal.acc 0.445 (155 s)
+  epoch  5 loss 0.894 val loss 0.855 bal.acc 0.548 (17 s)
+B22       test bal.acc 0.441 kappa 0.240 (val 0.535, 6 epochs, 2.1 min)
+2026-11-19 04:33:56 start pid 26249: --exp I_only --variant I_only --filters 16 --queries 2 --epoch-size 128 --max-epochs 10 --min-epochs 6 --patience 3 --test BWRat19
+fold test=BWRat19 val=BWRat20 variant=I_only C=16 Q=2
+BWRat20   test bal.acc 0.580 kappa 0.425 (val 0.524, 9 epochs, 22.8 min)
+  epoch  0 loss 1.107 val loss 1.095 bal.acc 0.430 (14 s)

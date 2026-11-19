@@ -39,3 +39,31 @@ Bogey     k=2    bal.acc 0.330 kappa -0.012
 Bogey     k=5    bal.acc 0.395 kappa 0.118
 Bogey     k=10   bal.acc 0.429 kappa 0.205
 Bogey     k=20   bal.acc 0.485 kappa 0.343
+Bogey     k=all  bal.acc 0.531 kappa 0.371
+Dino      k=1    bal.acc 0.335 kappa -0.001
+Dino      k=2    bal.acc 0.322 kappa -0.036
+Dino      k=5    bal.acc 0.331 kappa -0.015
+Dino      k=10   bal.acc 0.361 kappa 0.039
+Dino      k=20   bal.acc 0.480 kappa 0.199
+Dino      k=all  bal.acc 0.574 kappa 0.280
+Rizzo     k=1    bal.acc 0.328 kappa -0.014
+Rizzo     k=2    bal.acc 0.313 kappa -0.049
+Rizzo     k=5    bal.acc 0.340 kappa 0.015
+Rizzo     k=10   bal.acc 0.392 kappa 0.126
+Rizzo     k=20   bal.acc 0.532 kappa 0.397
+Rizzo     k=all  bal.acc 0.568 kappa 0.483
+Splinter  k=1    bal.acc 0.321 kappa -0.029
+Splinter  k=2    bal.acc 0.343 kappa 0.018
+Splinter  k=5    bal.acc 0.306 kappa -0.067
+Splinter  k=10   bal.acc 0.336 kappa 0.000
+Splinter  k=20   bal.acc 0.406 kappa 0.205
+Splinter  k=all  bal.acc 0.476 kappa 0.386
+    balanced_accuracy         kappa       
+                 mean    std   mean    std
+k                                         
+1               0.331  0.014 -0.004  0.032
+2               0.331  0.030 -0.004  0.064
+5               0.349  0.039  0.036  0.096
+10              0.392  0.060  0.139  0.165
+20              0.471  0.076  0.321  0.202
+all             0.518  0.073  0.389  0.168
