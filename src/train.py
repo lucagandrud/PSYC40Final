@@ -186,7 +186,8 @@ def run_fold(args, data, fold, out_dir: Path):
             best_loss, best, bad = vloss, v, 0; best_state = {k: t.clone() for k, t in model.state_dict().items()}
         else:
             bad += 1
-            if bad >= PATIENCE and epoch + 1 >= MIN_EPOCHS:
+            # never stop on a model that is still at chance on the validation rat
+            if bad >= PATIENCE and epoch + 1 >= MIN_EPOCHS and best > 0.40:
                 break
     model.load_state_dict(best_state)
     # test: every second of every session of the test rat

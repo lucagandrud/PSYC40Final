@@ -23,7 +23,7 @@ DRAWS = 20
 
 
 def main(exp: str = "decoder"):
-    torch.set_num_threads(4)
+    torch.set_num_threads(2)
     data = load_all()
     for sd in data.values():
         sd.input_mode = "relative"
