@@ -44,6 +44,10 @@ def n_rats(e):
 dec, base = stat("decoder"), stat("baseline")
 dec_sd, base_sd = stat("decoder", "bal_acc_sd"), stat("baseline", "bal_acc_sd")
 dec_k, base_k = stat("decoder", "kappa_mean"), stat("baseline", "kappa_mean")
+dec2, base2 = stat("decoder", "bal_acc_2class_mean"), stat("baseline", "bal_acc_2class_mean")
+dec2_sd, base2_sd = stat("decoder", "bal_acc_2class_sd"), stat("baseline", "bal_acc_2class_sd")
+dec2_k, base2_k = stat("decoder", "kappa_2class_mean"), stat("baseline", "kappa_2class_mean")
+rec = {k: stat("decoder", f"recall_{k}") for k in ("WAKE", "nonREM", "REM")}
 
 # ------------------------------------------------------------------ notebook text
 md("""
@@ -114,7 +118,7 @@ md("""
 md("""
 ## 4. Metric
 
-**Balanced accuracy** on the held-out rat: the mean of the three per-state recalls, so the large nonREM class (55% of labeled seconds) cannot inflate the score; chance is 0.33. I also report **Cohen's kappa**, agreement with the authors' labels beyond chance (the standard figure in sleep scoring), the confusion matrix, and results per rat and region. Every number below comes from rats the model never trained on.
+**Balanced accuracy** on the held-out rat: the mean of the per-state recalls, so the large nonREM class (55% of labeled seconds) cannot inflate the score; chance is 0.33 for three states and 0.50 for two. I report it for the three authors' states and for the project's primary question, WAKE vs SLEEP (nonREM and REM merged, from the same predictions). I also report **Cohen's kappa**, agreement with the authors' labels beyond chance (the standard figure in sleep scoring), the confusion matrix, and results per rat and region. Every number below comes from rats the model never trained on.
 """)
 
 md(f"""
@@ -122,15 +126,19 @@ md(f"""
 
 ### 5.1 Decoding held-out rats
 
-| model | balanced accuracy (mean ± sd over rats) | kappa | rats |
-|---|---|---|---|
-| CNN reading the raster | **{dec} ± {dec_sd}** | {dec_k} | {n_rats("decoder")} |
-| logistic regression on E/I rate traces | {base} ± {base_sd} | {base_k} | {n_rats("baseline")} |
+| model | WAKE / nonREM / REM: balanced accuracy (mean ± sd over rats) | kappa | WAKE vs SLEEP: balanced accuracy | kappa | rats |
+|---|---|---|---|---|---|
+| CNN reading the raster | **{dec} ± {dec_sd}** | {dec_k} | **{dec2} ± {dec2_sd}** | {dec2_k} | {n_rats("decoder")} |
+| logistic regression on E/I rate traces | {base} ± {base_sd} | {base_k} | {base2} ± {base2_sd} | {base2_k} | {n_rats("baseline")} |
+
+Per-state recall of the CNN, averaged over rats: WAKE {rec["WAKE"]}, nonREM {rec["nonREM"]}, REM {rec["REM"]}.
 """)
 code("""
 display(Image("../figures/results_decoder.png", width=1000))
 folds = pd.read_csv("../results/summary_folds.csv")
-show = folds[folds.experiment.isin(["decoder", "baseline"])].pivot(index=["rat", "region"], columns="experiment", values="balanced_accuracy").round(3)
+d = folds[folds.experiment.isin(["decoder", "baseline"])]
+show = d.pivot(index=["rat", "region"], columns="experiment", values=["balanced_accuracy", "bal_acc_2class"]).round(2)
+show.columns = [f"{'3-class' if a == 'balanced_accuracy' else 'WAKE vs SLEEP'}: {b}" for a, b in show.columns]
 display(HTML("<p><b>Balanced accuracy per held-out rat</b></p>")); display(show)
 """)
 
@@ -160,7 +168,7 @@ md("""
 E and I rates and the paper's synchrony measure (fraction of E cells firing in a 50 ms window, stepped every 25 ms), aligned to the authors' boundaries at 1 s resolution, as a percentage of each session's own baseline (−60 to −30 s); median and interquartile range across sessions. The authors define microarousals as up to 40 s of wake-like LFP between nonREM packets and wake interruptions as 40–120 s of wake-like activity during sleep. Only events that directly follow scored sleep are included (227 of 1738 microarousals and 288 of 1769 wake interruptions); the rest lie in stretches the authors left unscored, where no baseline state is defined. WAKE→SLEEP has 25 events across 17 sessions and SLEEP→WAKE only 3, so those two columns are descriptive.
 
 What the curves show: population synchrony jumps at microarousal onset (about +12%), and inhibitory rate rises in the 20 s before it and drops after; before wake interruptions all three traces rise over the preceding 20 s and fall at the scored onset. The changes are small (within ±15% of baseline) and no group's onset latency is reliably earlier than another's (bootstrap intervals in `results/transitions/summary.csv` span the whole window), so at 1 s resolution I cannot say that one cell type leads the scored boundary. The pre-onset rise before wake interruptions may partly reflect REM, which has the highest E rates and often precedes an awakening.
-"""
+""")
 code("""
 display(Image("../figures/transitions.png", width=1000))
 t = pd.read_csv("../results/transitions/summary.csv")
