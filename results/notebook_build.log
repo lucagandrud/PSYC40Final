@@ -1,7 +1,7 @@
 [NbConvertApp] Converting notebook /Users/lucagandrud/projects/PSYC40Final/notebooks/PSYC40Final.ipynb to notebook
 [IPKernelApp] WARNING | Kernel is running over TCP without encryption. All communication (including code and outputs) is sent in plain text and is susceptible to eavesdropping. Use IPC transport or launch with kernel manager-provisioned CurveZMQ keys to enable transport encryption.
-[NbConvertApp] Writing 1479521 bytes to /Users/lucagandrud/projects/PSYC40Final/notebooks/PSYC40Final.ipynb
+[NbConvertApp] Writing 1481258 bytes to /Users/lucagandrud/projects/PSYC40Final/notebooks/PSYC40Final.ipynb
 [NbConvertApp] Converting notebook /Users/lucagandrud/projects/PSYC40Final/notebooks/PSYC40Final.ipynb to html
 [NbConvertApp] WARNING | Alternative text is missing on 8 image(s).
-[NbConvertApp] Writing 1740415 bytes to /Users/lucagandrud/projects/PSYC40Final/reports/PSYC40Final.html
+[NbConvertApp] Writing 1740473 bytes to /Users/lucagandrud/projects/PSYC40Final/reports/PSYC40Final.html
 wrote /Users/lucagandrud/projects/PSYC40Final/notebooks/PSYC40Final.ipynb reports/PSYC40Final.html reports/PSYC40Final.pdf

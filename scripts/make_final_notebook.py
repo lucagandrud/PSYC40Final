@@ -205,7 +205,7 @@ The CNN beats the baseline on the three-state score in {wins("balanced_accuracy"
 """)
 code("""
 display(Image("../figures/results_decoder.png", width=900))
-display(Image("../figures/results_confusion.png", width=380))
+display(Image("../figures/results_confusion.png", width=300))
 folds = pd.read_csv("../results/summary_folds.csv")
 d = folds[folds.experiment.isin(["decoder", "baseline"])]
 show = d.pivot(index=["rat", "region"], columns="experiment", values=["balanced_accuracy", "bal_acc_2class"]).round(2)
@@ -221,7 +221,6 @@ Each row is the same network retrained from scratch with a part removed (on the 
 * **E cells only / I cells only**: the authors' type labels decide which rows the model sees (sessions with fewer than 3 I cells are skipped for these rows, every rat keeps at least one session).
 * **E cells, as many as I cells**: the control for the E/I comparison, random E subsets of the session's I-cell count (50 draws).
 * **Without the population convolutions**: the pooled signal goes straight to the readout, so the model cannot see how the population evolves over the second.
-* **Without the relational layer**: neurons are never compared with each other before pooling (run only where time allowed).
 
 {abl_table}
 """)
@@ -242,8 +241,11 @@ What the curves show: population synchrony jumps at microarousal onset (about +1
 """)
 code("""
 display(Image("../figures/transitions.png", width=1000))
-t = pd.read_csv("../results/transitions/summary.csv")
-display(t.round(2))
+t = pd.read_csv("../results/transitions/summary.csv").rename(columns={
+    "event": "boundary", "n_sessions": "sessions", "median_change_0_10s_pct": "median change, 0–10 s after (%)",
+    "onset_latency_s": "onset latency (s)", "ci_low": "latency 95% CI low", "ci_high": "latency 95% CI high"})
+display(HTML("<p><b>Onset latency</b>: first second (from −30 s) at which the median curve leaves its baseline by more than 2 sd for 3 s running; CI from 300 bootstraps over sessions.</p>"))
+display(t.round(1).set_index(["boundary", "trace"]))
 """)
 
 md("""
