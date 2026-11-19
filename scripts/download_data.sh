@@ -80,8 +80,9 @@ while S=$(next_session "$@"); do
   fi
 
   OK=0
-  for attempt in 1 2; do
+  for attempt in 1 2 3 4; do
     rm -f "$TGZ"   # server does not support resume; always start clean
+    [ "$attempt" -gt 1 ] && sleep $((30 * (attempt - 1)))   # back off after a failed attempt
     log "download $S attempt $attempt ($((SIZE/1048576)) MB)"
     t0=$(date +%s)
     if ! bash "$FETCH" "data/$S.tar.gz" "$TGZ" >> "$LOG" 2>&1; then
@@ -92,7 +93,7 @@ while S=$(next_session "$@"); do
     if [ "$GOT" = "$WANT" ]; then log "md5 OK $S ($((SIZE/1048576/dt)) MB/s)"; OK=1; break; fi
     log "md5 MISMATCH $S attempt $attempt (got $GOT want $WANT)"
   done
-  if [ "$OK" -ne 1 ]; then rm -f "$TGZ"; flag "$S" "download or md5 failed twice"; continue; fi
+  if [ "$OK" -ne 1 ]; then rm -f "$TGZ"; flag "$S" "download or md5 failed 4 times"; continue; fi
 
   log "extract $S"
   if ! tar -xzf "$TGZ" -C "$RAW" --exclude='*.eeg' --exclude='*ClusterQualityMeasures*'; then

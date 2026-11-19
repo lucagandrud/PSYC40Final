@@ -13,7 +13,7 @@ fi
 : "${CRCNS_USERNAME:?set CRCNS_USERNAME or create ~/.crcns_credentials}"
 : "${CRCNS_PASSWORD:?set CRCNS_PASSWORD or create ~/.crcns_credentials}"
 FN="fcx-1/${REMOTE}"
-curl -sS -L --fail --retry 3 --retry-delay 5 -C - -o "$OUT" \
+curl -sS -L --fail --retry 3 --retry-delay 5 -o "$OUT" \
   --data-urlencode "username=${CRCNS_USERNAME}" \
   --data-urlencode password@<(printf '%s' "$CRCNS_PASSWORD") \
   --data-urlencode "fn=${FN}" \
