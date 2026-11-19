@@ -1,0 +1,9 @@
+--exp settings_C32_Q2 --filters 32 --queries 2 --test B22
+--exp settings_C16_Q1 --filters 16 --queries 1 --test B22
+--exp settings_C16_Q4 --filters 16 --queries 4 --test B22
+--exp settings_C32_Q4 --filters 32 --queries 4 --test B22
+--exp settings_C32_Q2 --filters 32 --queries 2 --test BWRat20
+--exp settings_C16_Q1 --filters 16 --queries 1 --test BWRat20
+--exp settings_C16_Q4 --filters 16 --queries 4 --test BWRat20
+--exp settings_C32_Q4 --filters 32 --queries 4 --test BWRat20
+--exp control_rawcounts --filters 16 --queries 2 --test B22 --input counts

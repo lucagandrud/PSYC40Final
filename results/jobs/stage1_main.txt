@@ -1,0 +1,10 @@
+--exp decoder --filters 16 --queries 2 --test B22 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat17 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat18 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat19 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat20 --predict-all
+--exp decoder --filters 16 --queries 2 --test BWRat21 --predict-all
+--exp decoder --filters 16 --queries 2 --test Bogey --predict-all
+--exp decoder --filters 16 --queries 2 --test Dino --predict-all
+--exp decoder --filters 16 --queries 2 --test Rizzo --predict-all
+--exp decoder --filters 16 --queries 2 --test Splinter --predict-all

@@ -1,0 +1,13 @@
+B22       baseline bal.acc 0.371 kappa 0.058  recall {'WAKE': 0.48763489208633093, 'nonREM': 0.24908919174200514, 'REM': 0.37623762376237624}
+BWRat17   baseline bal.acc 0.430 kappa 0.239  recall {'WAKE': 0.2709141274238227, 'nonREM': 0.9321201617562103, 'REM': 0.08708708708708708}
+BWRat18   baseline bal.acc 0.382 kappa 0.131  recall {'WAKE': 0.28926441351888665, 'nonREM': 0.8467276227141483, 'REM': 0.009819967266775777}
+/Users/lucagandrud/projects/PSYC40Final/.venv/lib/python3.10/site-packages/sklearn/metrics/_classification.py:2801: UserWarning: y_pred contains classes not in y_true
+  warnings.warn("y_pred contains classes not in y_true")
+BWRat19   baseline bal.acc 0.507 kappa 0.234  recall {'WAKE': 0.5863874345549738, 'nonREM': 0.3970223325062035, 'REM': 0.5374449339207048}
+BWRat20   baseline bal.acc 0.432 kappa 0.179  recall {'WAKE': 0.3755165289256198, 'nonREM': 0.7529687729071983, 'REM': 0.16750700280112044}
+BWRat21   baseline bal.acc 0.300 kappa -0.065  recall {'WAKE': 0.1984251968503937, 'nonREM': 0.6067799301365513, 'REM': 0.09381920676464667}
+Bogey     baseline bal.acc 0.398 kappa 0.124  recall {'WAKE': 0.24393063583815028, 'nonREM': 0.6500997085442553, 'REM': 0.29949238578680204}
+Dino      baseline bal.acc 0.524 kappa 0.343  recall {'WAKE': 0.5666542888971408, 'nonREM': 0.6755731486063005, 'REM': 0.3294663573085847}
+Rizzo     baseline bal.acc 0.395 kappa 0.084  recall {'WAKE': 0.3058108995403808, 'nonREM': 0.11585454899479142, 'REM': 0.7639320299652841}
+Splinter  baseline bal.acc 0.428 kappa 0.239  recall {'WAKE': 0.3335330058703726, 'nonREM': 0.8275514996980474, 'REM': 0.12300796812749004}
+mean over rats: bal.acc 0.417 ± 0.062, kappa 0.157 ± 0.110

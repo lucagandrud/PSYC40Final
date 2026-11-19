@@ -1,0 +1,13 @@
+      event     trace  n_sessions  peak_change_pct  half_change_s  ci_low  ci_high
+   MA onset    E rate          21            -9.39          -26.0   -30.0    -2.00
+   MA onset    I rate          21           -13.64            6.0   -29.0     9.52
+   MA onset synchrony          21            -7.94          -26.0   -30.0    -7.00
+   WI onset    E rate          21            -4.25            4.0   -30.0     5.00
+   WI onset    I rate          21           -10.40            1.0   -29.0     5.00
+   WI onset synchrony          21             5.04          -30.0   -30.0     4.00
+WAKE->SLEEP    E rate          17           -22.63          -12.0   -29.0    -5.00
+WAKE->SLEEP    I rate          17            77.76          -25.0   -29.0    15.00
+WAKE->SLEEP synchrony          17           -24.83           -6.0   -29.0    -5.00
+SLEEP->WAKE    E rate           3           -52.07          -10.0   -30.0   -10.00
+SLEEP->WAKE    I rate           3           -49.77            3.0   -30.0    13.00
+SLEEP->WAKE synchrony           3           -45.47           -3.0   -30.0     3.00

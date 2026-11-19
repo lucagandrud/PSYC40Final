@@ -162,16 +162,14 @@ Recommend one option with reasons; the user decides.
 2. **Ablations, each with its control:**
    - **Excitatory vs inhibitory:** subsample excitatory units to the same count as inhibitory, 50 repeats; skip sessions with fewer than 3 inhibitory units.
    - **Neuron-dropping curve:** k = 1, 2, 5, 10, 20, all; 20 repeats each; mean with a spread band.
-   - **Fast vs slow firing:** excitatory top vs bottom third by WAKE rate, also compared at matched total spike counts by thinning the fast group's spikes.
-   - **Rate-only surrogate:** Poisson spikes at each unit's per-state mean rate. If real data beats the surrogate, timing and coordination carry information beyond rates.
 3. **Transitions:**
    - Align firing to microarousal and wake-interruption onsets (many events) and to the full WAKE↔SLEEP transitions (few events; descriptive only), ±60 s at 1 s bins.
-   - Plot per group (excitatory fast, excitatory slow, inhibitory) plus synchrony, and report which group leads the boundary.
+   - Plot per group (excitatory, inhibitory) plus synchrony, and report which group leads the boundary.
    - Interpret against the subcortical switch.
 4. **3D model:**
    - **Atlas:** BrainGlobe `whs_sd_rat_39um`. List its structure names and map the dataset's region labels to the closest structures; report the mapping.
    - **Placement:** units sit inside their region meshes, grouped by shank; within-region positions are schematic, and the caption says so.
-   - **Coloring:** excitatory-fast / excitatory-slow / inhibitory; units pulse on their spikes.
+   - **Coloring:** excitatory / inhibitory (the authors' labels); units pulse on their spikes.
    - **Showcase:** a session pair confirmed simultaneous in Phase 1 (two regions, same rat, same clock), across a WAKE→SLEEP transition, with a timeline of true and predicted state.
    - **Outputs:** a rotatable Plotly HTML and an mp4.
 
@@ -201,7 +199,7 @@ Recommend one option with reasons; the user decides.
 - **Unattended:** `scripts/run_unattended.sh` runs downloads + automatic QC under `caffeinate -i` + `nohup`. Progress: `bash scripts/status.sh`.
 - **Automatic QC:** every session that finishes extracting is inventoried and validated automatically, appended to `reports/qc_table.csv`, and `reports/qc_report.html` is regenerated. Only interrupt the user if a session fails or a check would block modeling.
 - **Dino regions:** Dino ACC and Dino mPFC sessions are distinct recordings with distinct region labels. Never pool or generalize across them without saying so; region effects are confounded with rat.
-- **Time budget (5 h):** 0:00–0:45 Phase 1 on 2 sessions; 0:45–1:15 model discussion; 1:15–2:30 decoder + evaluation; 2:30–3:30 ablations + transitions; 3:30–4:15 3D model; 4:15–5:00 final rerun on all cleared sessions, notebook, push. If behind, cut the rate-only surrogate first, then transitions. Never cut the decoder, the controlled ablations, or the 3D model.
+- **Time budget (5 h):** 0:00–0:45 Phase 1 on 2 sessions; 0:45–1:15 model discussion; 1:15–2:30 decoder + evaluation; 2:30–3:30 ablations + transitions; 3:30–4:15 3D model; 4:15–5:00 final rerun on all cleared sessions, notebook, push. (Relaxed: late submission is fine.) If behind, cut transitions first. Never cut the decoder, the controlled ablations, or the 3D model.
 - **BWRat17** (fear conditioning / shocks): QC and the authors' notes decide usability; report the verdict.
 - **Repo writing:** first person singular ("I"), never "we". Describe only the data actually used; don't mention sessions not downloaded or used.
 
@@ -218,3 +216,7 @@ Recommend one option with reasons; the user decides.
 
 ## Injection sessions (BWRat20_101513, BWRat21_121613, BWRat21_121813)
 For each: use `RecordingFileIntervals` to find the boundary between the recording files named in the authors' note (the injection time); check whether any spikes or state labels fall after it; compare with `GoodSleepInterval`; if post-injection data exists, exclude it automatically and add a QC flag. Report one line per session.
+
+## Decisions from the Phase 2 discussion (2026-11-18/19)
+- **Cell groups:** only the authors' E / I labels. No derived groups (the fast/slow split and its ablation were removed).
+- **Rate-only Poisson surrogate:** removed (synthetic, and building it needs the test rat's labels).
